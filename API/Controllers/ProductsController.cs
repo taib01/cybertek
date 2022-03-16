@@ -73,9 +73,10 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(string sort)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification();
+            var spec = new ProductsWithTypesAndBrandsSpecification(sort);
+
             var products = await _productRepo.ListAsync(spec);
 //// here we do mapping with nuget package " auto mapping " 
              return Ok(_mapper
