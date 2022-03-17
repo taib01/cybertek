@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -72,17 +73,38 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(
+/////////old methode to getting data 
+        /*public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(
                                                                 [FromQuery]ProductSpecParams productParams)
         
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
             var products = await _productRepo.ListAsync(spec);
-//// here we do mapping with nuget package " auto mapping " 
              return Ok(_mapper
              .Map< IReadOnlyList<Product> , IReadOnlyList<ProductToReturnDto> > (products));
+        }*/
+
+        [HttpGet]
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
+                                   [FromQuery]ProductSpecParams productParams)
+        
+        {
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+            var totalItems = await _productRepo.CountAsync(countSpec);
+            var products = await _productRepo.ListAsync(spec);
+
+
+            var data = _mapper
+            .Map< IReadOnlyList<Product> , IReadOnlyList<ProductToReturnDto> > (products);
+//// here we do mapping with nuget package " auto mapping " 
+             
+             
+             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex,
+                                            productParams.PageSize,totalItems,data));
+        }
+
 //// here we do mapper manuellement 
             /*return products.Select(product =>new ProductToReturnDto {
 
@@ -96,22 +118,17 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
                 ProductBrand = product.ProductBrand.Name,
                 ProductType = product.ProductType.Name
 
-            }).ToList();*/
-        }
+            }).ToList();
+            }*/
+        
+
+
+
+
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof ( ApiResponse), StatusCodes.Status404NotFound)]
-///////////// old methode fpr return data         
-        /*public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
-        {
-            var spec = new ProductsWithTypesAndBrandsSpecification(id);
-            var product = await _productRepo.GetEntityWithSpac(spec);
-            if (product == null) return NotFound(new ApiResponse(404)) ; 
-
-            return _mapper.Map<Product, ProductToReturnDto>(product);
-        }*/
-
-                public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
+        public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productRepo.GetEntityWithSpac(spec);
