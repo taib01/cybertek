@@ -73,10 +73,11 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(string sort, 
-	                                                            int? brandId, int? typeId)
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(
+                                                                [FromQuery]ProductSpecParams productParams)
+        
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(sort, brandId , typeId);
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
             var products = await _productRepo.ListAsync(spec);
 //// here we do mapping with nuget package " auto mapping " 
@@ -100,7 +101,17 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof ( ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
+///////////// old methode fpr return data         
+        /*public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
+        {
+            var spec = new ProductsWithTypesAndBrandsSpecification(id);
+            var product = await _productRepo.GetEntityWithSpac(spec);
+            if (product == null) return NotFound(new ApiResponse(404)) ; 
+
+            return _mapper.Map<Product, ProductToReturnDto>(product);
+        }*/
+
+                public async Task<ActionResult<ProductToReturnDto>> GetProducts(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productRepo.GetEntityWithSpac(spec);
