@@ -12,3 +12,4 @@ import { ShopComponent } from './shop.component';
   exports:[ShopComponent]
 })
 export class ShopModule { }
+
