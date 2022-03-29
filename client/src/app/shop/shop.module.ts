@@ -14,3 +14,4 @@ import { ProductItemComponent } from './product-item/product-item.component';
 })
 export class ShopModule { }
 
+
