@@ -5,7 +5,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
 	"Quantity":150,
-    "PictureUrl": "images/products/sb-ang1.png",
+    "PictureUrl": "images/products/sb-ang1.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
@@ -15,7 +15,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 150,
 	"Quantity":150,
-    "PictureUrl": "images/products/sb-ang2.png",
+    "PictureUrl": "images/products/sb-ang2.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
@@ -25,7 +25,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 180,
 	"Quantity":150,
-    "PictureUrl": "images/products/sb-core1.png",
+    "PictureUrl": "images/products/sb-core1.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
@@ -35,7 +35,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/sb-core2.png",
+	"PictureUrl": "images/products/sb-core2.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
@@ -45,7 +45,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
 	"Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/sb-react1.png",
+	"PictureUrl": "images/products/sb-react1.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 4
   },
@@ -55,7 +55,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/sb-ts1.png",
+	"PictureUrl": "images/products/sb-ts1.jpg",
     "ProductTypeId": 1,
     "ProductBrandId": 5
   },
@@ -65,7 +65,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",   
     "Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/hat-core1.png",
+	"PictureUrl": "images/products/hat-core1.jpg",
     "ProductTypeId": 2,
     "ProductBrandId": 2
   },
@@ -75,7 +75,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/hat-react1.png",
+	"PictureUrl": "images/products/hat-react1.jpg",
     "ProductTypeId": 2,
     "ProductBrandId": 4
   },
@@ -83,7 +83,7 @@
     "Name": "Product 9",
 	"Reference":"Anything",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",   
-    "PictureUrl": "images/products/hat-react2.png",
+    "PictureUrl": "images/products/hat-react2.jpg",
 	"Quantity":150,
 	"ProductTypeId": 2,
     "ProductBrandId": 4
@@ -94,7 +94,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",   
     "Price": 180,
 	"Quantity":150,
-	"PictureUrl": "images/products/glove-code1.png",
+	"PictureUrl": "images/products/glove-code1.jpg",
     "ProductTypeId": 4,
     "ProductBrandId": 3
   },
@@ -104,7 +104,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/glove-code2.png",
+    "PictureUrl": "images/products/glove-code2.jpg",
     "ProductTypeId": 4,
     "ProductBrandId": 3
   },
@@ -114,7 +114,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/glove-react1.png",
+    "PictureUrl": "images/products/glove-react1.jpg",
     "ProductTypeId": 4,
     "ProductBrandId": 4
   },
@@ -124,7 +124,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/glove-react2.png",
+    "PictureUrl": "images/products/glove-react2.jpg",
     "ProductTypeId": 4,
     "ProductBrandId": 4
   },
@@ -134,7 +134,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/boot-redis1.png",
+    "PictureUrl": "images/products/boot-redis1.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 6
   },
@@ -144,7 +144,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/boot-core2.png",
+    "PictureUrl": "images/products/boot-core2.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 2
   },
@@ -154,7 +154,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/boot-core1.png",
+    "PictureUrl": "images/products/boot-core1.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 2
   },
@@ -164,7 +164,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/boot-ang2.png",
+    "PictureUrl": "images/products/boot-ang2.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 1
   },
@@ -174,7 +174,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",    
     "Price": 180,
     "Quantity":150,
-    "PictureUrl": "images/products/boot-ang1.png",
+    "PictureUrl": "images/products/boot-ang1.jpg",
     "ProductTypeId": 3,
     "ProductBrandId": 1
   }
