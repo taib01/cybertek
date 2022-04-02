@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPagination } from '../shared/models/pagination';
 import { PaginationModule } from 'ngx-bootstrap';
 import { IProduct } from '../shared/models/product';
@@ -25,6 +25,7 @@ export class ShopComponent implements OnInit {
     {name : 'Price: Low to High' , value : 'priceAsc'},
     {name : 'Price: High to Low' , value : 'priceDesc'},
   ]
+  @ViewChild('search',{static:true}) searchTerm:ElementRef;
 
   constructor( private shopService : ShopService) { }
 
@@ -86,6 +87,16 @@ export class ShopComponent implements OnInit {
     //this.shopParams.pageNumber=event.page;
     this.shopParams.pageNumber=event;
 
+    this.getProducts();
+  }
+
+  onSearch(){
+   this.shopParams.search = this.searchTerm.nativeElement.value;
+   this.getProducts(); 
+  }
+  onReset(){
+    this.searchTerm.nativeElement.value = "";
+    this.shopParams=new ShopParams() ; 
     this.getProducts();
   }
   
