@@ -38,23 +38,13 @@
     <section class="col-9">
 
       <div class="d-flex justify-content-between align-items-center pb-2">
-        <header>
-          <h6 class="text-warning" *ngIf="totalCount && totalCount >0" >
-            Showing 
-            <strong>
-              {{(this.shopParams.pageNumber -1) * this.shopParams.pageSize+1}} - 
-              {{this.shopParams.pageNumber * this.shopParams.pageSize
-                > this.totalCount 
-                ? this.totalCount
-                : this.shopParams.pageNumber*this.shopParams.pageSize
-              }}
-            </strong> 
-            of 
-            <strong> {{this.totalCount}} </strong> 
-            Products 
-          </h6>
-          <h6 class="text-warning" *ngIf="totalCount===0"> There is <strong>0</strong> Result</h6>
-        </header>
+        
+        <app-paging-header 
+          [totalCount]="totalCount"
+          [pageSize]="this.shopParams.pageSize"
+          [pageNumber]="this.shopParams.pageNumber"
+        ></app-paging-header>
+
         <div class="form-inline">
           <input type="text" class="form-control mr-2" style="width:300px" placeholder="Search">
           <button class="btn btn-outline-success ml-2">Search</button>
@@ -69,17 +59,13 @@
         
       </div>
       <div class="d-flex justify-content-center" *ngIf="totalCount >0">
-        <pagination 
-          [boundaryLinks]="true" 
-          [totalItems]="this.totalCount"
+
+        <app-pager
+          [pageSize]="shopParams.pageSize"
+          [totalCount]="totalCount"
           (pageChanged)="onPageChange($event)"
-          [itemsPerPage]="this.shopParams.pageSize"
-        
-          previousText="&lsaquo;"
-          nextText="&rsaquo;" 
-          firstText="&laquo;" 
-          lastText="&raquo;" >
-        </pagination>
+        ></app-pager>
+
       </div>
     </section>
   </div>
