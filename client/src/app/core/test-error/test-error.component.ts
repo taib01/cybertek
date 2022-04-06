@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-test-error',
   templateUrl: './test-error.component.html',
@@ -46,7 +47,7 @@ export class TestErrorComponent implements OnInit {
       console.log(response);
     },error => { 
       console.log(error);
-      this.validationErrors= error.errors
+      this.validationErrors= error.errors;
     });
   }
 
