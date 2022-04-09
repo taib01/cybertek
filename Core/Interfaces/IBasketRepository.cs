@@ -8,7 +8,7 @@ namespace Core.Interfaces
         Task<CustomerBasket> GetBasketAsync (int basketId);
         Task<CustomerBasket> UpdateBasketAsync (CustomerBasket basket); 
 
-        void  AddingBasketAsync (CustomerBasket basket);
+        Task<CustomerBasket>  AddingBasketAsync (CustomerBasket basket);
         public void DeleteBasketAsync(int basketId);
          
     }

@@ -20,6 +20,7 @@ namespace Infrastructure.Data
             _database = redis ;
         }
 
+
         public void  DeleteBasketAsync(int basketId)
         {
             CustomerBasket basketItem =  _database.CustomerBaskets.Include(a => a.Items).FirstOrDefault(a=>a.Id==basketId); 
@@ -30,16 +31,18 @@ namespace Infrastructure.Data
               _database.SaveChanges();
         }
 
+
         public async Task<CustomerBasket> GetBasketAsync(int basketId)
         { 
             //BasketItem [] dataitems ;
             //dataitems =  _database.BasketItems.SingleOrDefault(b=>b.Id == basketId);
-            CustomerBasket dataId =  _database.CustomerBaskets.Include(a => a.Items).FirstOrDefault(a=>a.Id==basketId); ;
+            CustomerBasket item = await _database.CustomerBaskets.Include(a => a.Items).FirstOrDefaultAsync(a=>a.Id==basketId); ;
             //var dataItems = _database.BasketItems.SingleOrDefault(b => b.Customer);
 
             //return data.ToString() ? null : (data) ; 
-            return  dataId ; 
+            return item ; 
         }
+        
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
@@ -141,7 +144,10 @@ namespace Infrastructure.Data
         }*/
         
 
-        
+
+
+/////////////// * Adding working good without ( update & response ) //////////////////////////
+/*
         public void  AddingBasketAsync(CustomerBasket basket )
         {
             var v1 = new CustomerBasket ();
@@ -152,14 +158,53 @@ namespace Infrastructure.Data
                 v1.Id  = basket.Id ; 
             };
 
-
-            
-
             v1.Items = basket.Items ; 
             _database.CustomerBaskets.Add(v1);
             _database.SaveChanges();
         }
+*/
+        public  async Task<CustomerBasket>  AddingBasketAsync(CustomerBasket basket )
+        {
+            var v1 = new CustomerBasket ();
 
+            var testFind = _database.CustomerBaskets.Find(basket.Id); 
+            if (testFind == null )
+            {
+                v1.Id  = basket.Id ; 
+                v1.Items = basket.Items ; 
+                _database.CustomerBaskets.Add(v1);
+                _database.SaveChanges();
+                var lastColumn = _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefault();
+                basket.Id = lastColumn.Id ; 
+                return (basket);
+            }
+            else
+            {
+                CustomerBasket basketItem =  _database.CustomerBaskets.Include(a => a.Items).FirstOrDefault(a=>a.Id==basket.Id); 
+                var all = basketItem.Items ; 
+                 //_database.CustomerBaskets.Remove(basketItem);
+                _database.CustomerBaskets.Remove(basketItem);
+                 _database.BasketItems.RemoveRange(all);
+                 _database.SaveChanges();
+
+                v1.Id  = basket.Id ; 
+                v1.Items = basket.Items ; 
+                _database.CustomerBaskets.Add(v1);
+                _database.SaveChanges();
+                return (v1);
+            };
+
+
+            
+
+
+
+
+            
+            
+
+            
+        }
 
     }
 }

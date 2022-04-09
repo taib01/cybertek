@@ -14,9 +14,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public  void AddingBasket([FromBody]CustomerBasket basket)
+        public  async Task<ActionResult<CustomerBasket>> AddingBasket([FromBody]CustomerBasket basket)
         {
-              _basketRepository.AddingBasketAsync(basket);
+            var basket2 = await _basketRepository.AddingBasketAsync(basket);
+            return Ok(basket2);
             //return Ok(updateBasket);
         }
 
