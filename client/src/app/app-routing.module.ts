@@ -19,6 +19,8 @@ const routes: Routes = [
   //{path:'shop', component: ShopComponent},
   //{path:'shop/:id' , component :ProductDetailsComponent},
   {path:'shop', loadChildren:()=> import('./shop/shop.module').then(mod => mod.ShopModule)},
+  {path:'basket', loadChildren:()=> import('./basket/basket.module').then(mod => mod.BasketModule)},
+
 
   {path:'**',redirectTo:'',pathMatch:'full'}
   
