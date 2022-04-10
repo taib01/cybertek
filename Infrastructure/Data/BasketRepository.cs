@@ -42,7 +42,7 @@ namespace Infrastructure.Data
             //return data.ToString() ? null : (data) ; 
             return item ; 
         }
-        
+
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
@@ -174,8 +174,11 @@ namespace Infrastructure.Data
                 v1.Items = basket.Items ; 
                 _database.CustomerBaskets.Add(v1);
                 _database.SaveChanges();
-                var lastColumn = _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefault();
-                basket.Id = lastColumn.Id ; 
+                if(basket.Id == 0){
+                    var lastColumn = _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefault();
+                    basket.Id = lastColumn.Id ; 
+                }
+
                 return (basket);
             }
             else
