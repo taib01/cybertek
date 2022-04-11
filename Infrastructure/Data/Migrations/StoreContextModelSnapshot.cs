@@ -28,6 +28,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("CustomerBasketId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PictureUrl")
                         .HasColumnType("TEXT");
 

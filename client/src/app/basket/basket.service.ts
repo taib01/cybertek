@@ -39,6 +39,7 @@ export class BasketService {
 
   getCurrentBasketValue(){
     return this.basketSource.value; 
+    //return localStorage.getItem("basket_id");
   }
 
 
@@ -57,7 +58,7 @@ export class BasketService {
   }
   private addOrUpdateItem(items :IBasketItem[],itemToAdd:IBasketItem,quantity:number):IBasketItem[]
   {
-    const index =items.findIndex(i=>i.id ===itemToAdd.id);
+    const index =items.findIndex(i=>i.idProduct ===itemToAdd.idProduct);
     if ( index ===-1){
       itemToAdd.quantity=quantity; 
       items.push(itemToAdd);
@@ -67,11 +68,14 @@ export class BasketService {
     return items ; 
   }
 
+
+
   private createBasket(){
-    const basket =new Basket(); 
+
+    const basket =new Basket();
     //basket.id.toString()
     /// lazem ngeneri kol mara basket_id jdida  
-    localStorage.setItem('basket_id','125');
+    localStorage.setItem('basket_id','3');
     return basket ; 
   }
 
@@ -79,6 +83,7 @@ export class BasketService {
     return{
       //id : item.id,
       id:0,
+      idProduct :item.id,
       productName : item.name,
       price : item.price ,
       pictureUrl : item.pictureUrl,

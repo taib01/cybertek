@@ -5,6 +5,7 @@ export interface IBsaket {
 
 export interface IBasketItem {
     id: number;
+    idProduct:number;
     productName: string;
     price: number;
     quantity: number;
