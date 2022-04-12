@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { privateDecrypt } from 'crypto';
+//import { privateDecrypt } from 'crypto';
 import { DraggableItemService } from 'ngx-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,18 +12,41 @@ import { IProduct } from '../shared/models/product';
   providedIn: 'root'
 })
 export class BasketService {
+  static idBasket : number =7; 
   baseUrl = environment.apiUrl ; 
   private basketSource = new BehaviorSubject<IBsaket>(null);
   basket$ = this.basketSource.asObservable();
 
+  // static num: number=2;
+  // private basketSource2 = new BehaviorSubject<IBsaket>(null); 
+  // private basketSource3 = new Basket();
+
 
   constructor( private http : HttpClient) { }
-
+////// getting last id_basket from table ///////////// 
+/*
+  getLastIdOfBasket(){
+    return this.http.get<IBsaket>(this.baseUrl+'basket/GetLastIdOfBasket')
+  }  
+  lisenToGetLastIdOfBasket(){
+    return this.getLastIdOfBasket().subscribe( (response:IBsaket)=>
+    {
+       console.log(response);
+        //BasketService.num=response.id;
+        //this.num =response.id; 
+        //this.basketSource3.id=response.id;
+        //this.basketSource3.items=response.items; 
+      },error =>{
+        console.log(error);
+      });
+  } 
+*/
   getBasket(id: number){
     return this.http.get(this.baseUrl+'basket?id='+id)
                   .pipe(
                     map((basket:IBsaket)=>{
                       this.basketSource.next(basket);
+                      console.log(this.getCurrentBasketValue());
                     })
                   );
   }
@@ -32,14 +55,28 @@ export class BasketService {
     return this.http.post(this.baseUrl+'basket',basket).subscribe((response:IBsaket)=>{
       this.basketSource.next(response); 
       console.log(response);
+
+/// to save id basket in local storage /////////////////      
+      var basketObject = { 'basket_id': response.id};
+      localStorage.setItem('basketObject', JSON.stringify(basketObject));
+      /*var basketObjectAfter = localStorage.getItem('basketObject');
+      basketObject.basket_id=basketObject.basket_id+1;
+      console.log('basketObjectAfter: ', JSON.parse(basketObjectAfter));*/
+      console.log(localStorage.getItem('basketObject'));
+
+      var basket_object = localStorage.getItem('basketObject')  ;
+
+////////////////////////////////
+
     },error =>{
       console.log(error);
-    })
+    });
   }
 
   getCurrentBasketValue(){
     return this.basketSource.value; 
     //return localStorage.getItem("basket_id");
+
   }
 
 
@@ -52,6 +89,10 @@ export class BasketService {
     if ( basket ===null ){
       basket=this.createBasket();
     }
+
+
+
+    //basket.id=BasketService.idBasket ;
     basket.items=this.addOrUpdateItem(basket.items,itemToAdd,quantity);
     this.setBasket(basket);
 
@@ -71,15 +112,27 @@ export class BasketService {
 
 
   private createBasket(){
+/*
+     var basketObject = { 'basket_id': 1};
+     localStorage.setItem('basketObject', JSON.stringify(basketObject));
+     var basketObjectAfter = localStorage.getItem('basketObject');
+     basketObject.basket_id=basketObject.basket_id+1;
+     console.log('basketObjectAfter: ', JSON.parse(basketObjectAfter));
+
+     let basket2 =new Basket();
+     this.lisenToGetLastIdOfBasket();
+     console.log(BasketService.num) ;
+     console.log(this.basketSource3) ;
+*/    
+    //console.log(this.basketSource);
 
     const basket =new Basket();
-    //basket.id.toString()
-    /// lazem ngeneri kol mara basket_id jdida  
-    localStorage.setItem('basket_id','3');
+    localStorage.setItem('basket_id2','3');
     return basket ; 
   }
 
   private mapProductItemToBasketItem(item:IProduct,quantity:number):IBasketItem{
+    
     return{
       //id : item.id,
       id:0,

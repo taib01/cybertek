@@ -10,6 +10,8 @@ namespace Core.Interfaces
 
         Task<CustomerBasket>  AddingBasketAsync (CustomerBasket basket);
         public void DeleteBasketAsync(int basketId);
+
+        Task<CustomerBasket> GetBasketLastId();
          
     }
 }

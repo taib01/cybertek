@@ -197,16 +197,14 @@ namespace Infrastructure.Data
                 return (v1);
             };
 
-
             
+        }
 
-
-
-
-            
-            
-
-            
+        public  async Task<CustomerBasket>  GetBasketLastId()
+        {
+            var lastColumn = await _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefaultAsync();
+            //var id = lastColumn.Id ;
+            return lastColumn;
         }
 
     }

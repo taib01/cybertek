@@ -29,6 +29,18 @@ namespace API.Controllers
             return Ok(basket);
         }
 
+        [Route("GetLastIdOfBasket")]
+        [HttpGet]
+        public async Task<ActionResult<CustomerBasket>> GetBasketLastId()
+        {
+            var customerBasket = await _basketRepository.GetBasketLastId();
+
+            //return Ok(basket ?? new CustomerBasket(id));
+            return Ok(customerBasket);
+        }
+
+        
+
         [HttpPut]
         public async Task<ActionResult<CustomerBasket>> UpdateBasket([FromBody]CustomerBasket basket)
         {
