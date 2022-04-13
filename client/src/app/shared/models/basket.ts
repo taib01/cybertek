@@ -17,13 +17,16 @@ export interface IBasketItem {
 }
 
 export class Basket implements IBsaket{
-
-
-
     id : number  ;
     items: IBasketItem[] = [] ;
-
 }
+
+export interface IBasketTotals {
+    shipping : number ; 
+    subtotat : number ; 
+    total : number ; 
+}
+
 
 
 
