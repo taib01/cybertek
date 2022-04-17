@@ -175,7 +175,7 @@ namespace Infrastructure.Data
                 _database.CustomerBaskets.Add(v1);
                 _database.SaveChanges();
                 if(basket.Id == 0){
-                    var lastColumn = _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefault();
+                    var lastColumn = await _database.CustomerBaskets.OrderBy(x=>x.Id).LastOrDefaultAsync();
                     basket.Id = lastColumn.Id ; 
                 }
 

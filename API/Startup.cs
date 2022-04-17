@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Errors;
+using API.ExtentsionsStartup;
 using API.Helpers;
 using API.Middleware;
 using AutoMapper;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -52,6 +54,10 @@ namespace API
             services.AddDbContext<StoreContext>(x =>
                         x.UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
             );
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            
+               x.UseSqlite(_configuration.GetConnectionString("IdentityConnextion"))
+            );
             
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configurationRedis = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
@@ -78,6 +84,8 @@ namespace API
                 }
             );
 
+            services.AddIdentityService();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -90,9 +98,6 @@ namespace API
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
             });
-
-            
-
         }
 
 
@@ -119,6 +124,7 @@ namespace API
             app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
+            //app.UseAuthentication();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {
