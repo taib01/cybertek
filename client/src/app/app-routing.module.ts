@@ -21,6 +21,7 @@ const routes: Routes = [
   {path:'shop', loadChildren:()=> import('./shop/shop.module').then(mod => mod.ShopModule),data:{breadcrumb:'shop'}},
   {path:'basket', loadChildren:()=> import('./basket/basket.module').then(mod => mod.BasketModule)},
   {path:'checkout', loadChildren:()=> import('./checkout/checkout.module').then(mod => mod.CheckoutModule)},
+  {path:'account', loadChildren:()=> import('./account/account.module').then(mod => mod.AccountModule)},
 
 
   {path:'**',redirectTo:'',pathMatch:'full'}
@@ -34,4 +35,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 

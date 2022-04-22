@@ -13,19 +13,23 @@ export class ErrorInterceptor implements HttpInterceptor{
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
-            catchError(error=>{
+            catchError(error =>{
                 if (error){
                     
                     if(error.status === 400){
                         if(error.error.errors ){
                             throw error.error ;
                         }else {
-                            this.toastr.error(error.error.message, error.error.statusCode);
+                           //this.toastr.error(error.error.message, error.error.statusCode);
+                           console.log("prop1");
+                           console.log(error.error.message,error.error.statusCode);
                         }
                         
                     }
+
                     if(error.status === 401){
-                        this.toastr.error(error.error.message, error.error.statusCode);
+                        //this.toastr.error(error.error.message, error.error.statusCode);
+                        console.log("prop2");
                     }
 
                     if(error.status === 404){
