@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { AccountService } from '../account.service';
 export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   resMessage:string;
+  colorMessage:string;
 
 
-  constructor(private accountService : AccountService) { }
+  constructor(private accountService : AccountService , private router : Router) { }
 
   ngOnInit() {
     this.createLoginForm();
@@ -27,9 +29,13 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.accountService.login(this.loginForm.value).subscribe( () =>
      {
-       console.log('user logged in good');
+       this.router.navigateByUrl('/shop');
+       //this.resMessage='user logged ';
+       //this.colorMessage='success';
+       //setTimeout(function() { this.resMessage=""; }, 1000);
      }, error => {
        this.resMessage=error.error.message;
+       this.colorMessage='danger';
        console.log(error);
        console.log(this.resMessage);
      });
