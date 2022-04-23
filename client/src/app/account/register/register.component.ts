@@ -35,12 +35,20 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('/shop');
       }, error => {
       console.log(error);
-      //this.errors = error.errors;
-      this.errors =["L'adresse e-mail est utilisée"];
+      
+      if (error.errors[0]==="Email Adress is in use")
+      {
+        this.errors =["L'adresse e-mail est utilisée"];
+        //setTimeout(()=>{ this.errors.splice(0,this.errors.length)}, 2500);
+      }else{
+        this.errors = error.errors;
+        //setTimeout(()=>{ this.errors.splice(0,this.errors.length)}, 2500);
+      }
+      
       });
 
     }else{
-      this.errors=["Remplir tous les champ"];
+      this.errors=["Remplir tous les champs"];
       setTimeout(()=>{ this.errors.splice(0,this.errors.length)}, 2500);
     }
   }
