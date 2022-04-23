@@ -22,22 +22,28 @@ export class LoginComponent implements OnInit {
 
   createLoginForm(){
     this.loginForm=new FormGroup({
-      email : new FormControl ('',Validators.required),
+      email : new FormControl ('',[Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       passowrd : new FormControl('',Validators.required)
     });
   }
   onSubmit(){
-    this.accountService.login(this.loginForm.value).subscribe( () =>
-     {
-       this.router.navigateByUrl('/shop');
-       //this.resMessage='user logged ';
-       //this.colorMessage='success';
-       //setTimeout(function() { this.resMessage=""; }, 1000);
-     }, error => {
-       this.resMessage=error.error.message;
-       this.colorMessage='danger';
-       console.log(error);
-       console.log(this.resMessage);
-     });
+    if ( this.loginForm.valid){
+
+      this.accountService.login(this.loginForm.value).subscribe( () =>
+      {
+        this.router.navigateByUrl('/shop');
+      }, error => {
+        //this.resMessage=error.error.message;
+        this.resMessage="Vérifiez vos informations";
+        this.colorMessage='danger';
+        console.log(error);
+        console.log(this.resMessage);
+      });
+      
+    }else{
+      this.resMessage = 'Remplir tous les champ ' ;
+      this.colorMessage= 'danger';
+      setTimeout(()=>{ this.resMessage = '' ;}, 2500);
+    }
   }
 }
