@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Specifications;
 
+
 namespace Core.Interfaces
 {
     public interface IGenericRepository<T> where T: BaseEntity
@@ -14,7 +15,12 @@ namespace Core.Interfaces
 
         Task<int> CountAsync(ISpecification<T> spec);
 
-
+        public void  poostProduct (Product prod);
+        public void  poostType (ProductType type);
+        public void  poostBrand (ProductBrand brand);
+        public void deleteProduct(int id); 
+        public void deleteType(int id); 
+        public void deleteBrand(int id); 
 
     }
 }

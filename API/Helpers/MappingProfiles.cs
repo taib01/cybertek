@@ -15,7 +15,7 @@ namespace API.Helpers
                      .ForMember( d=>d.PictureUrl, o=>o.MapFrom<ProductUrlResolver>() );
 
             CreateMap<Adress, AdressDto>().ReverseMap();
-            
+            CreateMap<ProductToSendDto,Product>();
         }
     }
 }

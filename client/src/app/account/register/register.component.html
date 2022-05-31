@@ -7,7 +7,7 @@
 
     <div class="form-label-group">
         <input formControlName="displayName" type="text" id="inputdisplayName" class="form-control" placeholder="Nom" >
-        <label for="inputdisplayName">Nom</label>
+        <label for="inputdisplayName">Nom de compte</label>
         <span class="text-danger"
           *ngIf="registerForm.get('displayName').invalid 
           && registerForm.get('displayName').touched
@@ -46,6 +46,59 @@
         Mot de passe doit contenir 1 caractere majuscule , 1 caractere minuscule , 1 chiffre , 1 symbole et au moins 6 caractères
       </span>
     </div>
+
+    <div class="form-label-group">
+      <input formControlName="firstName" type="text"  class="form-control" placeholder="any" >
+      <label for="firstName">Nom</label>
+      <span class="text-danger" *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched&& registerForm.get('firstName').errors['required']  ">
+        Nom est obligatoire
+      </span>
+    </div>
+    <div class="form-label-group">
+      <input formControlName="lastName" type="text"  class="form-control" placeholder="any" >
+      <label for="lastName">Prenom</label>
+      <span class="text-danger" *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched&& registerForm.get('lastName').errors['required']  ">
+        Prenom est obligatoire
+      </span>
+    </div>
+
+    <div class="form-label-group">
+      <input formControlName="phoneNumber" type="text"  class="form-control"   placeholder="any">
+      <label for="phoneNumber">Numero de telephone</label>
+      <span class="text-danger" *ngIf="registerForm.get('phoneNumber').invalid && registerForm.get('phoneNumber').touched&& registerForm.get('phoneNumber').errors['required']  ">
+        Numero de telephone est obligatoire
+      </span>
+    </div>
+    <!--<strong>Votre Addresse :</strong>-->
+    <div class="form-label-group">
+      <input formControlName="street" type="text"  class="form-control"  placeholder="any" >
+      <label for="street">Rue</label>
+      <span class="text-danger" *ngIf="registerForm.get('street').invalid && registerForm.get('street').touched&& registerForm.get('street').errors['required']  ">
+        Rue est obligatoire
+      </span>
+    </div>
+    <div class="form-label-group">
+      <input formControlName="city" type="text"  class="form-control"  placeholder="any">
+      <label for="city">Ville</label>
+      <span class="text-danger" *ngIf="registerForm.get('city').invalid && registerForm.get('city').touched&& registerForm.get('city').errors['required']  ">
+        Ville est obligatoire
+      </span>
+    </div>
+    <div class="form-label-group">
+      <input formControlName="state" type="text"  class="form-control" placeholder="any" >
+      <label for="state">Gouvernorat</label>
+      <span class="text-danger" *ngIf="registerForm.get('state').invalid && registerForm.get('state').touched&& registerForm.get('state').errors['required']  ">
+        Gouvernorat est obligatoire
+      </span>
+    </div>
+    <div class="form-label-group">
+      <input formControlName="zipcode" type="text"  class="form-control" placeholder="any" >
+      <label for="zipcode">Code postal</label>
+      <span class="text-danger" *ngIf="registerForm.get('zipcode').invalid && registerForm.get('zipcode').touched&& registerForm.get('zipcode').errors['required']  ">
+        Code postalest obligatoire
+      </span>
+    </div>
+
        
 
     <div class="checkbox mb-3">

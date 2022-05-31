@@ -1,0 +1,198 @@
+
+<h1>admin  Page </h1>
+<div class="container">
+  <div class="row mt-5">
+
+
+    <section class="col-3 ">
+          <h4 class="text-warning ml-3">Sort</h4>
+          <select name="" id="" class="custom-select" (change)="onSortSelected($event.target.value)">
+            <option *ngFor="let sort of sortOption" [value]="sort.value">{{sort.name}}</option>
+          </select>
+  
+          <h4 class="text-warning ml-3 mt-3 ">Brands</h4>
+          <div class="row">
+            
+              <ul class="list-group col-10 m-0">
+                <li class="list-group-item  "
+                  style="height: 50px;"
+                 *ngFor="let brand of brands"
+                  [class.active]="brand.id===this.shopParams.brandId"
+                  [value]="brand.id"
+                  (click)="onBrandSelected(brand.id)"
+                   >
+                     {{brand.name}}  
+                </li>
+              </ul>
+            
+            <div class="col-2 m-0">
+              <button class="btn btn-sm btn-danger float-right fa fa-trash "
+              style="height: 50px;"
+                *ngFor="let brand of brands"
+                (click)="deletebrand(brand.id)">
+               </button>
+            </div>
+
+          </div>
+
+            
+          
+
+          <form [formGroup]="newbrand" (ngSubmit)="addbrand()" >
+            <div class="row m-0 p-0">
+              <div class="col-10 m-0 justify-content-between">
+                <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+                <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
+              </div>
+              <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+            </div>
+          </form>
+
+
+        <h4 class="text-warning ml-3 mt-3">Types</h4>
+        <div class="row">
+          <ul class="list-group col-10 m-0">
+            <li class="list-group-item " style="height: 50px;"
+              *ngFor="let type of types"
+              [class.active]="type.id===this.shopParams.typeId"
+              [value]="type.id"
+              (click)="onTypeSelected(type.id)">
+                {{type.name}}
+            </li>
+          </ul>
+
+        <div class="col-2 ">
+            <button class="btn btn-sm btn-danger float-right fa fa-trash "
+            style="height: 50px;"
+              *ngFor="let type of types"
+              (click)="deletetype(type.id)">
+             </button>
+            </div>
+        </div>
+
+        <form [formGroup]="newtype" (ngSubmit)="addtype()" >
+          <div class="row m-0 p-0">
+            <div class="col-10 m-0 justify-content-between">
+              <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+              <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
+            </div>
+            <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+          </div>
+        </form>
+
+    </section>
+
+
+    <section class="col-9">
+
+      <div class="d-flex justify-content-between align-items-center pb-2">
+        
+        <app-paging-header 
+          [totalCount]="totalCount"
+          [pageSize]="this.shopParams.pageSize"
+          [pageNumber]="this.shopParams.pageNumber"
+        ></app-paging-header>
+
+        <div class="form-inline">
+          <input  (keyup.enter)="onSearch()" #search type="text" class="form-control mr-2" style="width:300px" placeholder="Search">
+          <button (click)="onSearch()" class="btn btn-outline-success ml-2">Search</button>
+          <button (click)="onReset()"class="btn btn-outline-success ml-2">Reset</button>
+        </div>
+      </div>
+
+      <!--<div class="row mt-3">
+        <div class="col-md-4" *ngFor="let item of products" >
+          <app-product-item2 [product]="item"></app-product-item2>
+        </div>
+      </div>-->
+
+      <div class="container mt-5">
+        <h3> <strong>Listes des Produits</strong> </h3>
+        <div class="table-responsive">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class=" py-3 text-uppercase"> Id</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class=" py-3 text-uppercase"> Nom de Produit</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class=" py-3 text-uppercase"> Prix</div>
+                        </th>
+                        <th class="border-0 bg-light" scope="col">
+                            <div class=" py-3 text-uppercase"> Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    <tr *ngFor="let item of products">
+                        <td><strong>{{ item.id }}</strong></td>
+                        <td>{{ item.name }}</td>
+                        <td class="align-middle"><strong>{{item.price }}</strong></td>
+                        <td class="align-middle text-align-center"> 
+                          <button  (click)="deleteproduct(item.id)"class="btn btn-sm btn-danger fa fa-trash"></button>
+                          <button  routerLink="/shop/{{item.id}}" class="btn btn-sm btn-secondary fa fa-info-circle ml-2"></button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+      <div class="d-flex justify-content-center" *ngIf="totalCount >0">
+
+        <app-pager
+          [pageSize]="shopParams.pageSize"
+          [totalCount]="totalCount"
+          (pageChanged)="onPageChange($event)"
+        ></app-pager>
+
+      </div>
+      <div class="row mb-5" >
+        <div class="col-6">
+          <!--<input type="file" #file placeholder="choose file" (change)="uploadFile(file.files)" >-->
+          <!--<button class="btn btn-success" (click)="file.click()">Upload File</button>-->
+          <!-- (ngSubmit)="addtype()"  -->
+          <form [formGroup]="newproduct" (ngSubmit)="uploadfile(file.files)" >
+            <div class="row m-0 p-0">
+              <div class="col-10 m-0 justify-content-between">
+                <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+                <input  formControlName="refernce" type="text"  class="form-control " placeholder="refernce"    >
+                <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
+                <input  formControlName="description" type="text"  class="form-control " placeholder="description"    >
+                <input  formControlName="price" type="number"  class="form-control " placeholder="price"    >
+                <input  formControlName="quantity" type="number"  class="form-control " placeholder="quantity"    >
+                <select class="form-control" formControlName="productTypeId" name="productTypeId" id="" >
+                  <option  value="" disabled>choose type</option>
+                  <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
+                </select>
+                <!--<input  formControlName="productTypeId" type="number"  class="form-control " placeholder="productType"    >-->
+                <input  formControlName="productBrandId" type="number"  class="form-control " placeholder="productBrand"    >
+              </div>
+              <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+            </div>
+          </form>
+          <input type="file" #file placeholder="choose file"  >
+          <button class="btn btn-success" (click)="uploadfile(file.files)">Upload File</button>
+        </div>
+        <div class="col-4">
+          <span class="upload" *ngIf="progress > 0"> {{progress}}%</span>
+          <span class="upload" *ngIf="message"> {{progress}}</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+</div>
+
+<!--
+  <ul>
+    <li class="list-unstyled"  *ngFor=" let product of products">
+      {{product.name}}
+    </li>
+  </ul>
+-->

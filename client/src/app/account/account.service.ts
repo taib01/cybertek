@@ -4,30 +4,34 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IUser } from '../shared/models/user';
+import { IUser, IUser2 } from '../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 baseUrl = environment.apiUrl
-private currentUserSource= new BehaviorSubject<IUser>(null);
+public currentUserSource= new BehaviorSubject<IUser2>(null);
 currentUser$ = this.currentUserSource.asObservable();
 
 constructor(private http : HttpClient, private router : Router) { }
 
 getCurrentUserValue(){
   return this.currentUserSource.value;
+
 }
 
 loadCurrentUser(token :string){
    let headers = new HttpHeaders();
+   //var token = localStorage.getItem('token');
    headers = headers.set('Authorization',`Bearer ${token}`);
 
    return this.http.get(this.baseUrl+'account',{headers}).pipe(
-     map((user:IUser)=>{
+     map((user:IUser2)=>{
        if (user) {
          localStorage.setItem('token',user.token);
+         //localStorage.setItem('phone',user.phoneNumber); 
+         //localStorage.setItem('adress',user.adress.street+"-" + user.adress.city +"-" +user.adress.state); 
          this.currentUserSource.next(user);
        }
      })
@@ -36,22 +40,29 @@ loadCurrentUser(token :string){
 
 login(values : any){
   return this.http.post(this.baseUrl+'account/login', values).pipe(
-    map((user:IUser)=>
+    map((user:IUser2)=>
     {
       if (user){
-        localStorage.setItem('token',user.token); 
+        console.log(user);
         this.currentUserSource.next(user);
+        localStorage.setItem('token',user.token);
+        //localStorage.setItem('phone',user.phoneNumber); 
+        //localStorage.setItem('adress',user.adress.street+"-" + user.adress.city +"-" +user.adress.state); 
+        
       }
     })
   );
+  
 }
 
 register(values : any){
-  return this.http.post(this.baseUrl+'account/register', values).pipe(
-    map((user:IUser)=>
+  return this.http.post(this.baseUrl+'account/registerwithadress', values).pipe(
+    map((user:IUser2)=>
     {
       if (user){
         localStorage.setItem('token',user.token); 
+        //localStorage.setItem('phone',user.phoneNumber); 
+        //localStorage.setItem('adress',user.adress.street + "-" + user.adress.city + "-" +user.adress.state); 
         this.currentUserSource.next(user);
       }
     })
@@ -60,6 +71,8 @@ register(values : any){
 
 logout(){
 localStorage.removeItem('token');
+//localStorage.removeItem('phone');
+//localStorage.removeItem('adress');
 this.currentUserSource.next(null);
 this.router.navigateByUrl('/');
 }
@@ -68,5 +81,22 @@ checkEmailExists(email : string){
   return this.http.get(this.baseUrl+'/account/emailexists='+email);
 }
 
+
+udateUser(values : any){
+  let headers = new HttpHeaders();
+  var token = localStorage.getItem('token');
+  headers = headers.set('Authorization',`Bearer ${token}`);
+  return this.http.put(this.baseUrl+'account', values,{headers}).pipe(
+    map((user:IUser2)=>
+    {
+      if (user){
+        localStorage.setItem('token',user.token); 
+        //localStorage.setItem('phone',user.phoneNumber); 
+        //localStorage.setItem('adress',user.adress.street + "-" + user.adress.city + "-" +user.adress.state); 
+        //this.currentUserSource.next(user);
+      }
+    })
+  );
+}
 
 }

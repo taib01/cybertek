@@ -71,6 +71,32 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    idClient = table.Column<string>(type: "TEXT", nullable: true),
+                    customerBasketId = table.Column<int>(type: "INTEGER", nullable: false),
+                    shippingPrice = table.Column<int>(type: "INTEGER", nullable: false),
+                    date = table.Column<string>(type: "TEXT", nullable: true),
+                    total = table.Column<double>(type: "REAL", nullable: false),
+                    nameClient = table.Column<string>(type: "TEXT", nullable: true),
+                    adressClient = table.Column<string>(type: "TEXT", nullable: true),
+                    numeroClient = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_CustomerBaskets_customerBasketId",
+                        column: x => x.customerBasketId,
+                        principalTable: "CustomerBaskets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -108,6 +134,11 @@ namespace Infrastructure.Data.Migrations
                 column: "CustomerBasketId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_customerBasketId",
+                table: "Orders",
+                column: "customerBasketId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductBrandId",
                 table: "Products",
                 column: "ProductBrandId");
@@ -122,6 +153,9 @@ namespace Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BasketItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");

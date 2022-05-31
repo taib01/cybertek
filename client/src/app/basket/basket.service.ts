@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //import { privateDecrypt } from 'crypto';
 import { DraggableItemService } from 'ngx-bootstrap';
@@ -6,13 +6,17 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Basket, IBasketItem, IBasketTotals, IBsaket } from '../shared/models/basket';
+import { IOrder, Order } from '../shared/models/order';
 import { IProduct } from '../shared/models/product';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService { 
   baseUrl = environment.apiUrl ; 
+   orderCofirmation :string ;
   /////
   private basketSource = new BehaviorSubject<IBsaket>(null);
   basket$ = this.basketSource.asObservable();
@@ -20,12 +24,31 @@ export class BasketService {
   private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
+
+  
+
+  /*
+  private today = new Date();
+  private dd = String(this.today.getDate()).padStart(2, '0');
+  private mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  private yyyy = String(this.today.getFullYear());
+  private dateString : string ; 
+  this.dateString = this.mm + '/' + this.dd + '/' + this.yyyy;
+  */
+  
+   
+  
+   
+
   // static num: number=2;
   // private basketSource2 = new BehaviorSubject<IBsaket>(null); 
   // private basketSource3 = new Basket();
 
 
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient ,private router : Router ) { 
+    
+    
+  }
 ////// getting last id_basket from table ///////////// 
 /*
   getLastIdOfBasket(){
@@ -76,7 +99,11 @@ export class BasketService {
   }
 
   getCurrentBasketValue(){
+    /*console.log(this.getDate());
+    this.basketId = this.basketSource.value.id ;
+    console.log(this.basketId);*/
     return this.basketSource.value; 
+
     //return localStorage.getItem("basket_id");
 
   }
@@ -134,7 +161,7 @@ export class BasketService {
 
   private calculateTotals(){
     const basket = this.getCurrentBasketValue();
-    const shipping=0;
+    const shipping=7;
     const subtotal = basket.items.reduce((a,b) =>(b.price * b.quantity)+a , 0);
     const total = subtotal + shipping ; 
     this.basketTotalSource.next({shipping,total,subtotal});
@@ -165,7 +192,7 @@ export class BasketService {
       itemToAdd.quantity=quantity; 
       items.push(itemToAdd);
     }else{
-      items[index].quantity += quantity ; 
+      items[index].quantity += quantity ;
     }
     return items ; 
   }
@@ -206,7 +233,51 @@ export class BasketService {
       type : item.productType
     }
   }
+     setOrder () {
+      var basket_object = localStorage.getItem('basketObject')  ;
+      var basket_object2= JSON.parse(basket_object)
+      const basket_id = basket_object2.basket_id ;
+      const token_client = localStorage.getItem('token') ; 
+      if ( basket_id && token_client){
+        let item = new Order() ;
+        item.basketId = basket_id ; 
+        item.shippingPrice = 7;
+        item.date = this.getDate();
+        item.total=this.basketTotalSource.value.total ;
+        //
+      
+      //console.log(item);
 
+      var headers = new HttpHeaders();
+      var token = localStorage.getItem('token');
+      headers = headers.set('Authorization',`Bearer ${token}`);
+   
+      return this.http.post(this.baseUrl+'order',item,{headers}).subscribe( response => {
+        console.log(response) ; 
+        localStorage.removeItem('basketObject');
+        this.basketSource.next(null);
+        this.basketTotalSource.next(null);
+        this.router.navigateByUrl('/checkout');
+      });
+      }else
+      {
+        this.orderCofirmation = ' u need to be connecté and ur basket not empty';
+        setTimeout(()=>{ this.orderCofirmation = '' ;}, 3000);
+        this.router.navigateByUrl('/account/login');
+      }
+
+
+    }
+
+    private getDate (){
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = String(today.getFullYear());
+      var dateString : string ; 
+      dateString = dd + '/' + mm + '/' + yyyy;
+      return dateString;
+    }
 
 
 }

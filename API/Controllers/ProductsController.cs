@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
@@ -149,5 +151,63 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
             return Ok(await _typeRepo.ListAllAsync());
         }
+
+        
+
+
+
+        [HttpPost("image"),DisableRequestSizeLimit]
+        public void PostProductPicture(){
+            var file = Request.Form.Files[0];
+            //var product = Request.Form.Files[0];
+            var folderName = Path.Combine("Resources","Image");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(),folderName);
+            if (file.Length>0)
+            {
+                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                var fullPath = Path.Combine(pathToSave,fileName);
+                var dbPath = Path.Combine(folderName,fileName);
+                using(var stream = new FileStream(fullPath,FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+            } 
+        }
+
+        
+        [HttpPost()]
+        public void PostProduct([FromBody]ProductToSendDto prod){
+            var prodSaving=_mapper.Map<ProductToSendDto,Product>(prod);
+            _productRepo.poostProduct(prodSaving);
+        }
+
+        [HttpPost("type")]
+        public void PostType([FromBody]ProductType type){
+            _productRepo.poostType(type);
+        }
+        [HttpPost("brand")]
+        public void PostBrand([FromBody]ProductBrand brand){
+            _productRepo.poostBrand(brand);
+        }
+
+        [HttpDelete]
+        public void DeleteProduct(int id ){
+            
+            _productRepo.deleteProduct(id);
+        }
+
+        [HttpDelete("type")]
+        public void DeleteType(int id ){
+            
+            _productRepo.deleteType(id);
+        }
+
+        [HttpDelete("brand")]
+        public void DeleteBrand(int id ){
+            
+            _productRepo.deleteBrand(id);
+        }
+
     }
 }

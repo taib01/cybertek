@@ -28,24 +28,41 @@ export class LoginComponent implements OnInit {
       passowrd : new FormControl('',Validators.required)
     });
   }
-  onSubmit(){
-    if ( this.loginForm.valid){
 
-      this.accountService.login(this.loginForm.value).subscribe( () =>
-      {
-        this.router.navigateByUrl(this.returnUrl);
-      }, error => {
-        //this.resMessage=error.error.message;
-        this.resMessage="Vérifiez vos informations";
-        this.colorMessage='danger';
-        console.log(error);
-        console.log(this.resMessage);
-      });
-      
-    }else{
+  onSubmit()
+  {
+    if (this.loginForm.valid)
+    {
+
+        this.accountService.login(this.loginForm.value).subscribe( () =>
+        {
+          this.router.navigateByUrl(this.returnUrl);
+          /*this.router.navigate(['/shop']).then(()=>{
+            window.location.reload();
+          }) ;*/
+          
+          
+          
+        }, error => 
+        {
+          //this.resMessage=error.error.message;
+          this.resMessage="Vérifiez vos informations";
+          this.colorMessage='danger';
+          console.log(error);
+          console.log(this.resMessage);
+        });
+        
+    }else
+    {
       this.resMessage = 'Remplir tous les champ ' ;
       this.colorMessage= 'danger';
       setTimeout(()=>{ this.resMessage = '' ;}, 2500);
     }
+    //setTimeout(()=>{
+    //  this.accountService.loadCurrentUser(localStorage.getItem('token'));
+    //}, 2500);
+   
+    
   }
+  
 }

@@ -14,36 +14,43 @@ export class AppComponent implements OnInit {
   constructor(private basketservice : BasketService, private accountService : AccountService) {}
 
   ngOnInit(): void {
-    this.loadBasket();
     this.loadUser();
-
+    this.loadBasket();
+    
+    
   }
 
   loadUser(){
-    const token = localStorage.getItem('token');
-    if(token){
-      this.accountService.loadCurrentUser(token).subscribe(()=>{
+    var tokenClient = localStorage.getItem('token');
+    if(tokenClient){
+      this.accountService.loadCurrentUser(tokenClient).subscribe(()=>{
         console.log('loaded user');
       },error =>{
         console.log(error);
       });
-
     }
+    
   }
 
   loadBasket(){
-    var basket_object = localStorage.getItem('basketObject')  ;
-    var basket_object2= JSON.parse(basket_object)
-    const basket_id = basket_object2.basket_id;
-    if ( basket_id) 
-    {
-      this.basketservice.getBasket(basket_id).subscribe(()=>
+    if ( localStorage.getItem('basketObject') ) {
+
+      var basket_object = localStorage.getItem('basketObject')  ;
+      var basket_object2= JSON.parse(basket_object)
+      const basket_id = basket_object2.basket_id;
+
+      if ( basket_id) 
       {
-        console.log('initialised basket');
-      },error =>{
-        console.log(error);
-      })
+        this.basketservice.getBasket(basket_id).subscribe(()=>
+        {
+          console.log('initialised basket');
+        },error =>{
+          console.log(error);
+        });
+      }
+
     }
+
   }
     
     /*

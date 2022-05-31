@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220411162141_InitialCreate")]
+    [Migration("20220430144558_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,43 @@ namespace Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomerBaskets");
+                });
+
+            modelBuilder.Entity("Core.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("adressClient")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("customerBasketId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("idClient")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("nameClient")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("numeroClient")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("shippingPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("total")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("customerBasketId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
@@ -143,6 +180,17 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.CustomerBasket", null)
                         .WithMany("Items")
                         .HasForeignKey("CustomerBasketId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Order", b =>
+                {
+                    b.HasOne("Core.Entities.CustomerBasket", "customerBasket")
+                        .WithMany()
+                        .HasForeignKey("customerBasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("customerBasket");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>

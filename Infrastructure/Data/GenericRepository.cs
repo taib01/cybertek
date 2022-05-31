@@ -6,6 +6,7 @@ using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Infrastructure.Data
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
@@ -15,6 +16,10 @@ namespace Infrastructure.Data
         public GenericRepository(StoreContext context)
         {
             _context = context;
+        }
+
+        public GenericRepository()
+        {
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -45,6 +50,38 @@ namespace Infrastructure.Data
         private IQueryable<T> ApplySpecification (ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec); 
+        }
+
+        public void  poostProduct (Product prod){
+            _context.Products.Add(prod) ; 
+            _context.SaveChanges();
+        }
+        public void  poostType(ProductType type){
+            _context.ProductTypes.Add(type) ; 
+            _context.SaveChanges();
+        }
+        public void  poostBrand(ProductBrand brand){
+            _context.ProductBrands.Add(brand) ; 
+            _context.SaveChanges();
+        }
+
+
+        public void deleteProduct(int id){
+            var product = _context.Products.Find(id);
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+        }
+
+        public void deleteType(int id){
+            var type = _context.ProductTypes.Find(id);
+            _context.ProductTypes.Remove(type);
+            _context.SaveChanges();
+        }
+
+        public void deleteBrand(int id){
+            var brand = _context.ProductBrands.Find(id);
+            _context.ProductBrands.Remove(brand);
+            _context.SaveChanges();
         }
 
 

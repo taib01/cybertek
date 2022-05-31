@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="ml-3 d-inline-block align-middle">
                                         <h5 class="mb-0">
-                                            <a routerLink="/shope/{{item.id}}"class="text-dark">{{item.productName}}</a>
+                                            <a routerLink="/shop/{{item.idProduct}}"class="text-dark">{{item.productName}}</a>
                                         </h5>
                                         <span class="text-muted font-weight-normal font-italic d-bolck">
                                             type : {{item.type}}
@@ -59,9 +59,13 @@
                 </div>
             </div>
             <div class="row" >
+                <div class="col-6 offset-6" *ngIf="(orderCofirmation)">
+                    {{orderCofirmation}}  fddgdfgdfgdg
+                </div>
                 <div class="col-6 offset-6">
                     <app-order-totals></app-order-totals>
-                    <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-bock">
+                    <a (click)="passeOrder()" class="btn btn-outline-primary py-2 btn-bock">
+                        <!-- (click)="decrementItemQuatity(item)" routerLink="/checkout" -->
                         Proceed to checkout
                     </a>
                 </div>

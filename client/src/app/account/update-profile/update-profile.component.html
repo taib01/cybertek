@@ -1,0 +1,25 @@
+<form [formGroup]="userDetail" (ngSubmit)="UpdateUsar()" >
+    <!--  " -->
+    <div class="row m-0 p-0">
+      <div class="col-10 m-0 justify-content-between">
+<!--         <input  formControlName="displayName" [(ngModel)]="user.displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
+        <input  formControlName="firstName" [(ngModel)]="user.adress.firstName" type="text"  class="form-control " placeholder="Nom"    >
+        <input  formControlName="lastName" [(ngModel)]="user.adress.lastName" type="text"  class="form-control " placeholder="penom"    >
+        <input  formControlName="street" [(ngModel)]="user.adress.street" type="text"  class="form-control " placeholder="Rue"    >
+        <input  formControlName="city" [(ngModel)]="user.adress.city" type="text"  class="form-control " placeholder="Ville"    >
+        <input  formControlName="state" [(ngModel)]="user.adress.state" type="text"  class="form-control " placeholder="Gouvernorat"    >
+        <input  formControlName="zipcode" [(ngModel)]="user.adress.zipcode" type="text"  class="form-control " placeholder="Code postale"    >
+        <input  formControlName="phoneNumber" [(ngModel)]="user.phoneNumber" type="number"  class="form-control " placeholder="Numero de telephone"    > -->
+        <input  formControlName="displayName" [(ngModel)]="displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
+        <input  formControlName="firstName" [(ngModel)]="firstName" type="text"  class="form-control " placeholder="Nom"    >
+        <input  formControlName="lastName" [(ngModel)]="lastName" type="text"  class="form-control " placeholder="penom"    >
+        <input  formControlName="street" [(ngModel)]="street" type="text"  class="form-control " placeholder="Rue"    >
+        <input  formControlName="city" [(ngModel)]="city" type="text"  class="form-control " placeholder="Ville"    >
+        <input  formControlName="state" [(ngModel)]="state" type="text"  class="form-control " placeholder="Gouvernorat"    >
+        <input  formControlName="zipcode" [(ngModel)]="zipcode" type="text"  class="form-control " placeholder="Code postale"    >
+        <input  formControlName="phoneNumber" [(ngModel)]="phoneNumber" type="text"  class="form-control " placeholder="Numero de telephone"    >
+        
+      </div>
+      <button  class="btn btn-sm btn-success fa fa-check col-2  "></button>
+    </div>
+  </form>
