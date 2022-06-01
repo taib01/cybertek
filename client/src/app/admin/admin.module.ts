@@ -10,11 +10,12 @@ import { ProductItem2Component } from './product-item2/product-item2.component';
 import { ProductDetails2Component } from './product-details2/product-details2.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateBrandComponent } from './update-brand/update-brand.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, ProductItem2Component, ProductDetails2Component],
+  declarations: [AdminComponent, ProductItem2Component, ProductDetails2Component, UpdateBrandComponent],
   imports: [
     CommonModule,
     SharedModule,

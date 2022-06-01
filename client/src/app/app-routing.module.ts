@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
+import { ContactComponent } from './contact/contact.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'test-error', component: TestErrorComponent },
   {path:'server-error', component: ServerErrorComponent },
   {path:'not-found', component: NotFoundComponent },
+  {path:'contact', component: ContactComponent },
   //{path:'admin', component: AdminComponent },
   
 

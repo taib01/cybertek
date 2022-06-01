@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { ProductDetails2Component } from './product-details2/product-details2.component';
+import { UpdateBrandComponent } from './update-brand/update-brand.component';
+
 
 const routes : Routes =[
   {path:'', component: AdminComponent},
-  {path:':id' , component :ProductDetails2Component}
+  {path:'updatebrand', component:UpdateBrandComponent},
+  //{path:':id' , component :ProductDetails2Component},
+  
 ];
 
 @NgModule({

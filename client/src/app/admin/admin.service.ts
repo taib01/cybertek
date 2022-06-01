@@ -119,4 +119,25 @@ export class AdminService {
     return this.http.post(this.baseUrl+'/image',DataFormData,{reportProgress:true , observe : 'events'})
   }
 
+  updateBrand(item : object){
+    return this.http.put(this.baseUrl+'/brand',item).subscribe(()=>
+    {console.log('updating brand success');
+    this.route.navigateByUrl('/admin');
+  },error =>{
+    console.log(error);
+  });
+  }
+
+  updateType(item : object){
+    return this.http.put(this.baseUrl+'/type',item).subscribe(()=>
+    {console.log('updating type success');
+    this.route.navigateByUrl('/admin');
+  },error =>{
+    console.log(error);
+  });
+  }
+
 }
+  
+
+ 

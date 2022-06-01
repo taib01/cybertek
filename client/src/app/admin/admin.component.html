@@ -25,12 +25,18 @@
                 </li>
               </ul>
             
-            <div class="col-2 m-0">
+            <div class="col-4 m-0">
               <button class="btn btn-sm btn-danger float-right fa fa-trash "
               style="height: 50px;"
                 *ngFor="let brand of brands"
                 (click)="deletebrand(brand.id)">
                </button>
+
+               <button class="btn btn-sm btn-danger float-right fa fa-cog "
+               style="height: 50px;"
+                 *ngFor="let brand of brands"
+                 [routerLink]="['/admin/updatebrand', { id: brand.id , name : brand.name }]">
+                </button>
             </div>
 
           </div>
@@ -67,6 +73,7 @@
               *ngFor="let type of types"
               (click)="deletetype(type.id)">
              </button>
+             
             </div>
         </div>
 
