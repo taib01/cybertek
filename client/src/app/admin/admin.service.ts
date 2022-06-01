@@ -110,6 +110,7 @@ export class AdminService {
   addProduct(item : object){
     return this.http.post(this.baseUrl,item).subscribe(()=>
     {console.log('adding product success');
+    //this.route.navigateByUrl('/admin');
   },error =>{
     console.log(error);
   });

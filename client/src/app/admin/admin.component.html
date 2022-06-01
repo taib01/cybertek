@@ -73,6 +73,11 @@
               *ngFor="let type of types"
               (click)="deletetype(type.id)">
              </button>
+             <button class="btn btn-sm btn-danger float-right fa fa-cog "
+             style="height: 50px;"
+               *ngFor="let type of types"
+               [routerLink]="['/admin/updatetype', { id: type.id , name : type.name }]">
+              </button>
              
             </div>
         </div>

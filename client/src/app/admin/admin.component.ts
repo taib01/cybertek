@@ -162,6 +162,7 @@ export class AdminComponent implements OnInit {
   addbrand(){
     this.adminService.addBrand(this.newbrand.value) ; 
     window.location.reload();
+    
   }
   addtype(){
     this.adminService.addType(this.newtype.value) ; 
