@@ -1,3 +1,15 @@
 .container{
     margin-top: 140px;
+
 }
+:root{
+    .color_1{
+    
+        color :#247D68 !important;
+        //background: #247D68;
+    }
+}
+
+$theme-colors: ( "primary":    #247D68);
+//@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";

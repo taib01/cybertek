@@ -65,7 +65,7 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
         public ProductsController(IGenericRepository<Product> ProductRepo,
         IGenericRepository<ProductBrand> BrandRepo,
-        IGenericRepository<ProductType> TypeRepo , IMapper mapper)
+        IGenericRepository<ProductType> TypeRepo , IMapper mapper )
         {
             _productRepo = ProductRepo;
             _brandRepo = BrandRepo;
@@ -208,6 +208,24 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
             
             _productRepo.deleteBrand(id);
         }
+
+
+        [HttpPut]
+        public void PutProduct([FromBody]ProductToSendDto product ){
+            var prodSaving=_mapper.Map<ProductToSendDto,Product>(product);
+            _productRepo.putProduct(prodSaving);
+        }
+        [HttpPut("type")]
+        public void PutType([FromBody]ProductType type ){
+            
+            _productRepo.putType(type);
+        }
+        [HttpPut("brand")]
+        public void PutBrand([FromBody]ProductBrand brand ){
+            
+            _productRepo.putBrand(brand);
+        }
+
 
     }
 }

@@ -84,6 +84,22 @@ namespace Infrastructure.Data
             _context.SaveChanges();
         }
 
+        public void putProduct(Product product){
+            //var brand = _context.ProductBrands.Find(id);
+            _context.Products.Update(product);
+            _context.SaveChanges();
+        }
+        public void putType(ProductType type){
+            //var brand = _context.ProductBrands.Find(id);
+            _context.ProductTypes.Update(type);
+            _context.SaveChanges();
+        }
+        public void putBrand(ProductBrand brand){
+            //var brand = _context.ProductBrands.Find(id);
+            _context.ProductBrands.Update(brand);
+            _context.SaveChanges();
+        }
+
 
     }
 }

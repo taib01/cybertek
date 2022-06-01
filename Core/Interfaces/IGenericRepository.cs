@@ -18,9 +18,14 @@ namespace Core.Interfaces
         public void  poostProduct (Product prod);
         public void  poostType (ProductType type);
         public void  poostBrand (ProductBrand brand);
+        
         public void deleteProduct(int id); 
         public void deleteType(int id); 
         public void deleteBrand(int id); 
+
+        public void putProduct(Product product);
+        public void putBrand(ProductBrand brand);
+        public void putType(ProductType type); 
 
     }
 }
