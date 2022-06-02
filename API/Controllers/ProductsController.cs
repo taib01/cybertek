@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -164,7 +165,7 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(),folderName);
             if (file.Length>0)
             {
-                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                var fileName = DateTime.Now.ToString("ddMMyyyy_HH_mm_ss") + "_" + ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                 var fullPath = Path.Combine(pathToSave,fileName);
                 var dbPath = Path.Combine(folderName,fileName);
                 using(var stream = new FileStream(fullPath,FileMode.Create))

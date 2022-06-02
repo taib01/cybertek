@@ -91,6 +91,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("shippingPrice")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("state")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("total")
                         .HasColumnType("REAL");
 

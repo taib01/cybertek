@@ -22,4 +22,5 @@ export interface IOrderDis {
     nameClient: string;
     adressClient: string;
     numeroClient: string;
+    state:string;
 }

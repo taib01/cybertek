@@ -11,5 +11,6 @@ namespace Core.Entities
         public string nameClient { get; set; }
         public string adressClient { get; set; }
         public string  numeroClient { get; set; }
+        public string  state { get; set; }
     }
 }

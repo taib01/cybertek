@@ -15,6 +15,9 @@ export class AdminService {
   baseUrlAll='https://localhost:5001/api/products?pageSize=50';
   baseUrl= 'https://localhost:5001/api/products';
 
+  brandsForProduct : IBrand[];
+  typesForProduct : IType[];
+
 
   constructor( private http: HttpClient , private route : Router) { }
 
@@ -136,6 +139,25 @@ export class AdminService {
   },error =>{
     console.log(error);
   });
+  }
+
+  updateProduct(item : object){
+    return this.http.put(this.baseUrl,item).subscribe(()=>
+    {console.log('updating product success');
+    this.route.navigateByUrl('/admin');
+  },error =>{
+    console.log(error);
+  });
+  }
+
+  getDate (){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = String(today.getFullYear());
+    var dateString : string ; 
+    dateString = dd + '/' + mm + '/' + yyyy;
+    return today.toUTCString();
   }
 
 }

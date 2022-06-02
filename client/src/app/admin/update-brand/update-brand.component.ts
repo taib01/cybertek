@@ -14,14 +14,14 @@ export class UpdateBrandComponent implements OnInit {
   brandDetail : FormGroup ;
 
   private brand = {
-      id: "" ,
+      id: 0 ,
       name:""
 
   };
 
   constructor( private serv : AdminService , builder : FormBuilder, private route :ActivatedRoute) {
       this.brandDetail=builder.group({
-        id:"",
+        id:0,
         name:""
       });
       this.brand.id=this.route.snapshot.params.id; 

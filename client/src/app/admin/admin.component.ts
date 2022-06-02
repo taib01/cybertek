@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
   newproduct = new FormGroup({
     // badelt l Id b id *** 
     id: new FormControl(0), 
-    refernce: new FormControl(''),
+    reference: new FormControl(''),
     name: new FormControl(''),
     description: new FormControl(''),
     price: new FormControl(''),
@@ -84,6 +84,7 @@ export class AdminComponent implements OnInit {
     {
       this.brands =[{id:0,name:'All'}, ...response];
       this.brandsForProduct=[...response];
+      this.adminService.brandsForProduct=[...response];
     },error =>
     {
       console.log(error); 
@@ -95,6 +96,7 @@ export class AdminComponent implements OnInit {
     {
       this.types = [{id:0,name:'All'}, ...response];
       this.typesForProduct=[...response];
+      this.adminService.typesForProduct=[...response];
     },error =>
     {
       console.log(error); 
@@ -174,8 +176,8 @@ export class AdminComponent implements OnInit {
     return ; 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append('product',this.newproduct.value);
-    formData.append('file',fileToUpload,fileToUpload.name);
+    //formData.append('product',this.newproduct.value);
+    formData.append('file',fileToUpload,/* this.adminService.getDate()+ */fileToUpload.name);
     this.adminService.uploadFile(formData)
     .subscribe(event =>{
       if (event.type === HttpEventType.UploadProgress){
@@ -187,6 +189,7 @@ export class AdminComponent implements OnInit {
       }
     });
     this.newproduct.value.pictureUrl = fileToUpload.name;
+    this.newproduct.value.pictureUrl =  /* this.adminService.getDate()+ */this.newproduct.value.pictureUrl ;
     this.adminService.addProduct(this.newproduct.value);
     window.location.reload();
   }

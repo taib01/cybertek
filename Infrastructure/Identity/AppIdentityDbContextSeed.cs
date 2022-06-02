@@ -24,7 +24,8 @@ namespace Infrastructure.Identity
                         City="manouba",
                         State="tebourba",
                         Zipcode="1133"
-                    }
+                    },
+                    
                 };
                 await userManager.CreateAsync(user,"Pa$$w0rd");
             }

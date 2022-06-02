@@ -12,15 +12,17 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateBrandComponent } from './update-brand/update-brand.component';
 import { UpdateTypeComponent } from './update-type/update-type.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, ProductItem2Component, ProductDetails2Component, UpdateBrandComponent, UpdateTypeComponent],
+  declarations: [AdminComponent, ProductItem2Component, ProductDetails2Component, UpdateBrandComponent, UpdateTypeComponent, UpdateProductComponent],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl:'never'}),
     //RouterModule
     AdminRoutingModule
   ]

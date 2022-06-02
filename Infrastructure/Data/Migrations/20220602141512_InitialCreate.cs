@@ -83,7 +83,8 @@ namespace Infrastructure.Data.Migrations
                     total = table.Column<double>(type: "REAL", nullable: false),
                     nameClient = table.Column<string>(type: "TEXT", nullable: true),
                     adressClient = table.Column<string>(type: "TEXT", nullable: true),
-                    numeroClient = table.Column<string>(type: "TEXT", nullable: true)
+                    numeroClient = table.Column<string>(type: "TEXT", nullable: true),
+                    state = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

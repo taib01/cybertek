@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
@@ -53,10 +54,12 @@ namespace Infrastructure.Data
         }
 
         public void  poostProduct (Product prod){
+            prod.PictureUrl= DateTime.Now.ToString("ddMMyyyy_HH_mm_ss") + "_" +prod.PictureUrl ;
             _context.Products.Add(prod) ; 
             _context.SaveChanges();
         }
         public void  poostType(ProductType type){
+
             _context.ProductTypes.Add(type) ; 
             _context.SaveChanges();
         }

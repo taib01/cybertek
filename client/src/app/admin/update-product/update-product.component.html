@@ -1,0 +1,38 @@
+<p>update-product works!</p>
+<form [formGroup]="productDetail" (ngSubmit)="uploadfile(file.files)" >
+    <div class="row m-0 p-0">
+      <div class="col-10 m-0 justify-content-between">
+        <input  formControlName="id"  [(ngModel)]="product.id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+        <input  formControlName="reference" [(ngModel)]="product.reference" type="text"  class="form-control " placeholder="refernce"    >
+        <input  formControlName="name" [(ngModel)]="product.name" type="text"  class="form-control " placeholder="name"    >
+        <input  formControlName="description" [(ngModel)]="product.description" type="text"  class="form-control " placeholder="description"    >
+        <input  formControlName="price" [(ngModel)]="product.price" type="number"  class="form-control " placeholder="price"    >
+        <input  formControlName="quantity" [(ngModel)]="product.quantity" type="number"  class="form-control " placeholder="quantity"    >
+        
+        <input  formControlName="productType" [(ngModel)]="productType" type="text"  class="form-control " placeholder="productType"    >
+
+        <select   formControlName="productTypeId"   [(ngModel)]="product.productTypeId"  name="productTypeId" class="form-control" id="PTIS" >
+          <option  value="" disabled selected> choose other type </option>
+          <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
+        </select>
+
+        <input  formControlName="productBrand" [(ngModel)]="productBrand" type="text"  class="form-control " placeholder="productType"    >
+
+        <select formControlName="productBrandId" [(ngModel)]="product.productBrandId"   name="productBrandId" class="form-control"  id="PBIS" >
+          <option  value="" disabled selected> choose other brand</option>
+          <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
+        </select>
+
+        <div class="row">
+            <div> <input type="file" #file placeholder="choose file"  ></div>
+            <div class="p-2">
+                <img src="{{product.pictureUrl}}" alt="{{product.name}}"class="img-fluid" style="width:80px">
+            </div>
+        </div>
+
+        <!--<input  formControlName="productTypeId" type="number"  class="form-control " placeholder="productType"    >-->
+        <!--<input  formControlName="productBrandId"  [(ngModel)]="product.productBrandId" type="number"  class="form-control " placeholder="productBrand"    >-->
+      </div>
+      <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+    </div>
+  </form>

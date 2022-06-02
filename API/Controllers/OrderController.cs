@@ -53,7 +53,8 @@ namespace API.Controllers
                  total = orderDto.total,
                  nameClient = user.Adress.FirstName +'-'+user.Adress.LastName , 
                  adressClient=user.Adress.State +'-'+user.Adress.City+'-'+user.Adress.Street ,
-                 numeroClient=user.PhoneNumber 
+                 numeroClient=user.PhoneNumber ,
+                 state="En attente"
                  
              };
              var result = await _context.Orders.AddAsync(order);

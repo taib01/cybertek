@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220430144558_InitialCreate")]
+    [Migration("20220602141512_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,6 +92,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<int>("shippingPrice")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("state")
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("total")
                         .HasColumnType("REAL");
