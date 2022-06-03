@@ -24,6 +24,7 @@ const routes: Routes = [
 
   //{path:'shop', component: ShopComponent},
   //{path:'shop/:id' , component :ProductDetailsComponent},
+  {path:'order', loadChildren:()=> import('./admin/order/order.module').then(mod=>mod.OrderModule)},
   {path:'admin', loadChildren:()=> import('./admin/admin.module').then(mod => mod.AdminModule)},
   {path:'shop', loadChildren:()=> import('./shop/shop.module').then(mod => mod.ShopModule),data:{breadcrumb:'shop'}},
   {path:'basket', loadChildren:()=> import('./basket/basket.module').then(mod => mod.BasketModule)},

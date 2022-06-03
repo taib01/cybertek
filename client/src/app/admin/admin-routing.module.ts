@@ -12,7 +12,9 @@ const routes : Routes =[
   {path:'', component: AdminComponent},
   {path:'updatebrand', component:UpdateBrandComponent},
   {path:'updatetype', component:UpdateTypeComponent},
-  {path:'updateproduct', component:UpdateProductComponent}
+  {path:'updateproduct', component:UpdateProductComponent},
+  
+  
   //{path:':id' , component :ProductDetails2Component},
   
 ];

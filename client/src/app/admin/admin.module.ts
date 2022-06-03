@@ -16,6 +16,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 
 
 
+
 @NgModule({
   declarations: [AdminComponent, ProductItem2Component, ProductDetails2Component, UpdateBrandComponent, UpdateTypeComponent, UpdateProductComponent],
   imports: [

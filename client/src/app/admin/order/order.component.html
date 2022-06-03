@@ -1,0 +1,57 @@
+<p>order works!</p>
+<div class="container mt-5" *ngIf="orders">
+    <div class="table-responsive">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Id</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Nom de Client</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> N.Telephone</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Date</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Adress</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Total</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> État</div>
+                    </th>
+                    <th class="border-0 bg-light" scope="col">
+                        <div class="p-2 px-3 text-uppercase"> Action</div>
+                    </th>
+
+
+                    
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr *ngFor="let item of orders">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.nameClient }}</td>
+                    <td>{{ item.numeroClient }}</td>
+                    <td class="align-middle">{{ item.date }}</td>
+                    <td class="align-middle"> {{ item.adressClient }}</td>
+                    <td class="align-middle">{{ item.total }} TND</td>
+                    <td class="align-middle">{{ item.state }} </td>
+                    <td style="width: 150px;">
+                        <button  (click)="confirmorder(item.id)" class="btn btn-sm btn-success fa fa-check"></button>
+                        <button  (click)="waitingorder(item.id)" class="btn btn-sm btn-secondary ml-1 fa fa-refresh"></button>
+                        <button  (click)="cancelorder(item.id)" class="btn btn-sm btn-danger ml-1 fa fa-close"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container mt-5 text-center" *ngIf="orders.length===0">
+    <h1>there is no orders</h1>
+</div>

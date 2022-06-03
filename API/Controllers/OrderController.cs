@@ -72,7 +72,7 @@ namespace API.Controllers
              
              //var result =  _context.Orders.Include(a => a.customerBasket).SingleOrDefault(b => b.idClient == user.Id);
              //var result =  _context.Orders.Include(a => a.customerBasket).FirstOrDefault(a=>a.idClient==user.Id); 
-             var result =  _context.Orders.Include(a => a.customerBasket).Where(b=> b.idClient == user.Id); 
+             var result =  _context.Orders.Include(a => a.customerBasket).ThenInclude(a => a.Items).Where(b=> b.idClient == user.Id); 
              
             //if (result.) return BadRequest(new ApiResponse(400));
             return  result.ToList();
@@ -91,6 +91,46 @@ namespace API.Controllers
             //if (result.) return BadRequest(new ApiResponse(400));
             return await result.ToListAsync();
         }
+
+
+        ///////////////////////
+        [Authorize]
+        [HttpPut("confirm")]
+        public  void Confirm([FromBody]int id)
+        {
+            var order = _context.Orders.Find(id);
+            order.state = "Confirmé";
+
+             _context.Orders.Update(order);
+             _context.SaveChanges();
+            //if (result.) return BadRequest(new ApiResponse(400));
+            
+        }
+        [Authorize]
+        [HttpPut("cancel")]
+        public  void cancel([FromBody]int id)
+        {
+            var order = _context.Orders.Find(id);
+            order.state = "Annulé";
+
+             _context.Orders.Update(order);
+             _context.SaveChanges();
+            //if (result.) return BadRequest(new ApiResponse(400));
+            
+        }
+        [Authorize]
+        [HttpPut("waiting")]
+        public  void waiting([FromBody]int id)
+        {
+            var order = _context.Orders.Find(id);
+            order.state = "En attente";
+
+             _context.Orders.Update(order);
+             _context.SaveChanges();
+            //if (result.) return BadRequest(new ApiResponse(400));
+            
+        }
+        ///////////////////////
 
 
     }
