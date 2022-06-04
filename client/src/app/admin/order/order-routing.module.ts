@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderComponent } from './order.component';
+import { OrderDetaisComponent } from './order-detais/order-detais.component';
 
 const routes : Routes =[
-  {path:'', component: OrderComponent}
+  {path:'', component: OrderComponent},
+  {path:'details', component: OrderDetaisComponent}
   
 ];
 

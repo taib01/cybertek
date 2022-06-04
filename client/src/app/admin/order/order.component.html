@@ -46,6 +46,8 @@
                         <button  (click)="confirmorder(item.id)" class="btn btn-sm btn-success fa fa-check"></button>
                         <button  (click)="waitingorder(item.id)" class="btn btn-sm btn-secondary ml-1 fa fa-refresh"></button>
                         <button  (click)="cancelorder(item.id)" class="btn btn-sm btn-danger ml-1 fa fa-close"></button>
+                        <button  [routerLink]="['/order/details', { id: item.customerBasketId }]" class="btn btn-sm btn-secondary ml-1 fa fa-info"></button>
+                        
                     </td>
                 </tr>
             </tbody>

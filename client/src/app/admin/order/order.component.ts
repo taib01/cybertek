@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { IOrderDis } from 'src/app/shared/models/order';
 import { OrderService } from './order.service';
 
@@ -11,6 +12,7 @@ import { OrderService } from './order.service';
 export class OrderComponent implements OnInit {
   orders : IOrderDis[] = [] ;
 
+
   constructor( private orderService : OrderService , private route : Router) { }
 
   ngOnInit() {
@@ -21,7 +23,7 @@ export class OrderComponent implements OnInit {
     this.orderService.getListOrder().subscribe(response => 
       {
         this.orders=[...response];
-
+        console.log("orders :")
         console.log(this.orders);
       } ,error =>
       {
