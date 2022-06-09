@@ -1,20 +1,20 @@
-<div class="bg-light px-4 py-3 text-uppercase font-weight-bold">
-    Order Summary 
+<div class="bg-primary text-white px-4 py-3 text-uppercase font-weight-bold ">
+    Sommaire de la commande 
 </div>
 <div class="p-4">
-    <p class="font-italic mb-4"> Shipping costs will be added depending on choices made during chechout</p>
+    <p class="font-italic mb-4"> Les frais de transport sont 7dt pour toute la tunisie</p>
     <ul class="list-unstyled mb-4" *ngIf="(basketTotals$ | async)">
         <li class="d-flex justify-content-between py-3 border-bottom">
-            <strong class="text-muted">Order subtotal</strong>
+            <strong class="text-muted">Totales des produits</strong>
             <strong class="text-muted">{{ (basketTotals$| async).subtotal }} TND</strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
-            <strong class="text-muted">Shipping and handling</strong>
+            <strong class="text-muted">Transport</strong>
             <strong class="text-muted">{{ (basketTotals$ | async).shipping }} TND</strong>
         </li>
         <li class="d-flex justify-content-between py-3 border-bottom">
-            <strong class="text-muted">Total</strong>
-            <strong class="text-muted">{{ (basketTotals$ | async).total }} TND</strong>
+            <strong class="text-muted">Prix totale de commande</strong>
+            <strong class="text-warning">{{ (basketTotals$ | async).total }} TND</strong>
         </li>
 
     </ul>

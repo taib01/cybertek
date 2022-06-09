@@ -9,11 +9,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ShopModule } from '../shop/shop.module';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './footer/footer.component';
 
 // BrowserAnimationsModule  zedtou wa9tely n7awel n5adem fel toastr
 
 @NgModule({
-  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent],
+  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -24,6 +25,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       preventDuplicates:true
     })
   ],
-  exports :[NavBarComponent]
+  exports :[NavBarComponent , FooterComponent]
 })
 export class CoreModule {}

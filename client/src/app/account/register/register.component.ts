@@ -33,13 +33,14 @@ export class RegisterComponent implements OnInit {
       street :[null,[Validators.required]] ,
       city :[null,[Validators.required]],
       state:[null,[Validators.required]] , 
-      zipcode:[null,[Validators.required]]
+      zipcode:[null,[Validators.required,Validators.pattern("^[0-9]+$")]]
 
     });
   }
 
   onSubmit(){
     if (this.registerForm.valid){
+      
       //// mapping
       var adressobject =  new Adress() ;
         adressobject.firstName = this.registerForm.value.firstName;

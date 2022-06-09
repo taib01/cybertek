@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -50,17 +50,17 @@ export class UpdateProfileComponent implements OnInit {
 
   };
 
-  constructor( private accountService : AccountService , builder : FormBuilder) {
+  constructor( private accountService : AccountService , private builder : FormBuilder) {
     //window.location.reload();
-    this.userDetail=builder.group({
-      displayName :"",//this.accountService.getCurrentUserValue().displayName,
-      firstName : "",//this.accountService.getCurrentUserValue().adress.firstName,
-      lastName : "",//this.accountService.getCurrentUserValue().adress.lastName,
-      street : "",//this.accountService.getCurrentUserValue().adress.street,
-      city : "" ,//this.accountService.getCurrentUserValue().adress.city,
-      state : "" ,//this.accountService.getCurrentUserValue().adress.state,
-      zipcode : "",//this.accountService.getCurrentUserValue().adress.zipcode,
-      phoneNumber : ""//this.accountService.getCurrentUserValue().phoneNumber
+    this.userDetail=this.builder.group({
+      displayName:[null,[Validators.required]],
+      phoneNumber : [null ,[Validators.required,Validators.pattern("^[0-9]{8}$")]],
+      firstName :[null,[Validators.required]] ,
+      lastName :[null,[Validators.required]] ,
+      street :[null,[Validators.required]] ,
+      city :[null,[Validators.required]],
+      state:[null,[Validators.required]] , 
+      zipcode:[null,[Validators.required,Validators.pattern("^[0-9]+$")]]
     });
 
 
@@ -83,36 +83,41 @@ export class UpdateProfileComponent implements OnInit {
     console.log(this.accountService.getCurrentUserValue());
     this.userDetail.value.email =this.accountService.getCurrentUserValue().email;
     this.userDetail.value.displayName =this.accountService.getCurrentUserValue().displayName;
+    this.userDetail.value.firstName =this.accountService.getCurrentUserValue().adress.firstName;
     //this.accountService.getCurrentUserValue
 
   }
   UpdateUsar(){
-    this.user.displayName=this.displayName;
-    this.user.phoneNumber=this.phoneNumber;
-    this.user.adress.firstName=this.firstName;
-    this.user.adress.lastName=this.lastName;
-    this.user.adress.street=this.street
-    this.user.adress.city=this.city;
-    this.user.adress.state=this.state;
-    this.user.adress.zipcode=this.zipcode; 
+    if (this.userDetail.valid ){
+      this.user.displayName=this.displayName;
+      this.user.phoneNumber=this.phoneNumber;
+      this.user.adress.firstName=this.firstName;
+      this.user.adress.lastName=this.lastName;
+      this.user.adress.street=this.street
+      this.user.adress.city=this.city;
+      this.user.adress.state=this.state;
+      this.user.adress.zipcode=this.zipcode; 
 
-    this.accountService.udateUser(this.user ).subscribe(()=> {
-      console.log('update_success');
-      window.location.reload();
-    },error=>{
-      console.log(error);
-    });
+      this.accountService.udateUser(this.user ).subscribe(()=> {
+        console.log('update_success');
+        window.location.reload();
+      },error=>{
+        console.log(error);
+      });
+    }
   }
 
   loadUser(){
-    var tokenClient = localStorage.getItem('token');
-    if(tokenClient){
-      this.accountService.loadCurrentUser(tokenClient).subscribe(()=>{
-        console.log('loaded user');
-      },error =>{
-        console.log(error);
-      });
-    } 
+    
+      var tokenClient = localStorage.getItem('token');
+      if(tokenClient){
+        this.accountService.loadCurrentUser(tokenClient).subscribe(()=>{
+          console.log('loaded user');
+        },error =>{
+          console.log(error);
+        });
+      } 
+    
   }
 
     

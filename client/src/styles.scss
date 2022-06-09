@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    //min-height: 90vh;
+}
+
+$theme-colors: (
+  "primary": #247D68,
+  "warning": #C67F10
+
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";

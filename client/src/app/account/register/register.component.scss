@@ -1,11 +1,24 @@
 .form-signin {
     width: 100%;
-    max-width: 33vw;
+    max-width: 66vw;
     padding: 25px !important ;
     margin: auto;
-    margin-top: 25vh  ;
+    //margin-top: 0vh  ;
     padding-left: 50px !important;
     padding-right: 50px !important;
+  }
+  @media only screen and (max-width: 768px) {
+
+    .form-signin {
+      //width: 100%;
+      max-width: 90vw;
+      padding: 25px !important ;
+      margin: auto;
+      margin-top: 25vh  ;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      
+    }
   }
   
 .form-label-group {

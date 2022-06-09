@@ -1,8 +1,8 @@
-<form [formGroup]="userDetail" (ngSubmit)="UpdateUsar()" >
-    <!--  " -->
+<!-- <form [formGroup]="userDetail" (ngSubmit)="UpdateUsar()" >
+    
     <div class="row m-0 p-0">
-      <div class="col-10 m-0 justify-content-between">
-<!--         <input  formControlName="displayName" [(ngModel)]="user.displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
+      <div class="col-10 m-0 justify-content-between"> -->
+<!--     <input  formControlName="displayName" [(ngModel)]="user.displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
         <input  formControlName="firstName" [(ngModel)]="user.adress.firstName" type="text"  class="form-control " placeholder="Nom"    >
         <input  formControlName="lastName" [(ngModel)]="user.adress.lastName" type="text"  class="form-control " placeholder="penom"    >
         <input  formControlName="street" [(ngModel)]="user.adress.street" type="text"  class="form-control " placeholder="Rue"    >
@@ -10,7 +10,7 @@
         <input  formControlName="state" [(ngModel)]="user.adress.state" type="text"  class="form-control " placeholder="Gouvernorat"    >
         <input  formControlName="zipcode" [(ngModel)]="user.adress.zipcode" type="text"  class="form-control " placeholder="Code postale"    >
         <input  formControlName="phoneNumber" [(ngModel)]="user.phoneNumber" type="number"  class="form-control " placeholder="Numero de telephone"    > -->
-        <input  formControlName="displayName" [(ngModel)]="displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
+<!--         <input  formControlName="displayName" [(ngModel)]="displayName" type="text"  class="form-control " placeholder="Pseudonyme"    >
         <input  formControlName="firstName" [(ngModel)]="firstName" type="text"  class="form-control " placeholder="Nom"    >
         <input  formControlName="lastName" [(ngModel)]="lastName" type="text"  class="form-control " placeholder="penom"    >
         <input  formControlName="street" [(ngModel)]="street" type="text"  class="form-control " placeholder="Rue"    >
@@ -22,4 +22,126 @@
       </div>
       <button  class="btn btn-sm btn-success fa fa-check col-2  "></button>
     </div>
+  </form> -->
+
+
+
+
+
+
+  <form class="form-signin shadow p-3 mb-5 bg-white rounded" [formGroup]="userDetail" (ngSubmit)="UpdateUsar()" >
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal text-primary"><strong>Profil</strong></h1>
+    </div>
+
+
+    <div class="form-row m-0">
+        <input formControlName="displayName" [(ngModel)]="displayName" type="text" id="inputdisplayName" class="form-control" placeholder="Pseudonyme" >
+        <!-- <label for="inputdisplayName">Pseudonyme</label> -->
+        <span class="text-danger"
+          *ngIf="userDetail.get('displayName').invalid 
+          && userDetail.get('displayName').touched
+          && userDetail.get('displayName').errors['required']  ">
+          Pseudonyme est obligatoire
+        </span>
+    </div>
+
+
+
+ 
+
+    <div class="form-label-group">
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <input  formControlName="firstName" [(ngModel)]="firstName" type="text"  class="form-control" placeholder="Nom" >
+        <!-- <label for="firstName">Nom</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('firstName').invalid && userDetail.get('firstName').touched&& userDetail.get('firstName').errors['required']  ">
+          Nom est obligatoire
+        </span>
+      </div>
+      <div class="col">
+        <input formControlName="lastName" [(ngModel)]="lastName" type="text"  class="form-control" placeholder="Prenom" >
+        <!-- <label for="lastName">Prenom</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('lastName').invalid && userDetail.get('lastName').touched&& userDetail.get('lastName').errors['required']  ">
+          Prenom est obligatoire
+        </span>
+      </div>
+    </div>
+
+    <div class="form-label-group">
+    </div>
+
+    <div class="form-row m-0 ">
+      <input formControlName="phoneNumber" [(ngModel)]="phoneNumber" type="text"  class="form-control"   placeholder="Numero de telephone">
+      <!-- <label for="phoneNumber">Numero de telephone</label> -->
+      <span class="text-danger" *ngIf="userDetail.get('phoneNumber').invalid && userDetail.get('phoneNumber').touched&& userDetail.get('phoneNumber').errors['required']  ">
+        Numéro de téléphone est obligatoire
+      </span>
+      <span class="text-danger" *ngIf="userDetail.get('phoneNumber').invalid && userDetail.get('phoneNumber').touched&& userDetail.get('phoneNumber').errors['pattern']  ">
+        Numéro de téléphone doit comporter 8 chiffres
+      </span>
+    </div>
+
+    
+    <div class="form-label-group">
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <input formControlName="street" [(ngModel)]="street" type="text"  class="form-control"  placeholder="Rue" >
+        <!-- <label for="street">Rue</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('street').invalid && userDetail.get('street').touched&& userDetail.get('street').errors['required']  ">
+          Rue est obligatoire
+        </span>
+      </div>
+      <div class="col">
+        <input formControlName="city" [(ngModel)]="city" type="text"  class="form-control"  placeholder="Ville">
+        <!-- <label for="city">Ville</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('city').invalid && userDetail.get('city').touched&& userDetail.get('city').errors['required']  ">
+          Ville est obligatoire
+        </span>
+      </div>
+    </div>
+    <div class="form-label-group">
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <input formControlName="state" [(ngModel)]="state" type="text"  class="form-control" placeholder="Gouvernorat" >
+        <!-- <label for="state">Gouvernorat</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('state').invalid && userDetail.get('state').touched&& userDetail.get('state').errors['required']  ">
+          Gouvernorat est obligatoire
+        </span>
+      </div>
+      <div class="col">
+        <input formControlName="zipcode" [(ngModel)]="zipcode" type="text"  class="form-control" placeholder="Code postal" >
+        <!-- <label for="zipcode">Code postal</label> -->
+        <span class="text-danger" *ngIf="userDetail.get('zipcode').invalid && userDetail.get('zipcode').touched&& userDetail.get('zipcode').errors['required']  ">
+          Code postal est obligatoire
+        </span>
+        <span class="text-danger" *ngIf="userDetail.get('zipcode').invalid && userDetail.get('zipcode').touched&& userDetail.get('zipcode').errors['pattern']  ">
+          Code postal est doit étre une numéro
+        </span>
+      </div>
+    </div>
+    
+    <div class="form-label-group">
+
+    </div>
+    <div class="form-label-group">
+
+    </div>
+
+       
+
+    <div class="checkbox mb-3">
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Enregistrer</button>
+    <ul class="text-danger text-center list-unstyled" *ngIf="errors">
+        <li *ngFor="let error of errors" >
+            {{error}}
+        </li>
+    </ul>
   </form>

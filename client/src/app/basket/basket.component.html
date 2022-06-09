@@ -1,4 +1,4 @@
-<h1>Basket</h1>
+<!-- <h1>Basket</h1> -->
 <div *ngIf="(basket$ | async) === null" >
     <p>There are no items in your basket</p>
 </div>
@@ -6,29 +6,29 @@
 
     <div class="pb-5">
         <div class="container">
-            <div class="row">
-                <div class="table-responsive">
+            <div class="row m-0">
+                <div class="table-responsive shadow-sm ">
                     <table class="table">
-                        <thead>
+                        <thead class="bg-primary text-uppercase text-center text-white">
                             <tr>
-                                <th class="border-0 bg-light" scope="col">
-                                    <div class="p-2 px-3 text-uppercase"> Products</div>
+                                <th class="border-0 " scope="col">
+                                    <div class="py-2 px-0"> Products</div>
                                 </th>
-                                <th class="border-0 bg-light" scope="col">
-                                    <div class="p-2 px-3 text-uppercase"> Price</div>
+                                <th class="border-0 " scope="col">
+                                    <div class="py-2 px-0"> Price</div>
                                 </th>
-                                <th class="border-0 bg-light" scope="col">
-                                    <div class="p-2 px-3 text-uppercase"> Quantity</div>
+                                <th class="border-0 " scope="col">
+                                    <div class="py-2 px-0"> Quantity</div>
                                 </th>
-                                <th class="border-0 bg-light" scope="col">
-                                    <div class="p-2 px-3 text-uppercase"> Total</div>
+                                <th class="border-0 " scope="col">
+                                    <div class="py-2 px-0"> Total</div>
                                 </th>
-                                <th class="border-0 bg-light" scope="col">
-                                    <div class="p-2 px-3 text-uppercase"> Remove</div>
+                                <th class="border-0 " scope="col">
+                                    <div class="py-2 px-0"> Remove</div>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody class="">
                             <tr *ngFor="let item of basket.items">
                                 <th scope="row" class="row align-items-center">
                                     <div class="p-2">
@@ -43,30 +43,30 @@
                                         </span>
                                     </div>
                                 </th>
-                                <td class="align-middle"><strong>{{ item.price  }}TND</strong></td>
-                                <td class="align-middle">
-                                    <div class="d-flex align-items-center">
+                                <td class="align-middle text-center"><strong>{{ item.price  }}TND</strong></td>
+                                <td class="align-middle text-center">
+                                    <div class="d-flex align-items-center justify-content-center">
                                         <i (click)="decrementItemQuatity(item)" class="fa fa-minus-circle text-warning mr-2" style="cursor:pointer;font-size:2em;"></i>
                                         <span class="font-weight-bold " style="cursor:pointer;font-size:2em;">{{item.quantity }}</span>
                                         <i (click)="incrementItemQuatity(item)" class="fa fa-plus-circle text-warning mx-2" style="cursor:pointer;font-size : 2em;"></i>
                                     </div>
                                 </td>
-                                <td class="align-middle"><strong>{{ item.price * item.quantity }}TND</strong></td>
+                                <td class="align-middle text-center"><strong>{{ item.price * item.quantity }}TND</strong></td>
                                 <td class="align-middle text-center"><a class="text-danger"><i (click)="removeBasketItem(item)" class="fa fa-trash" style="font-size:2em;cursor:pointer;"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-6 offset-6" *ngIf="(orderCofirmation)">
-                    {{orderCofirmation}}  fddgdfgdfgdg
+            <div class="row m-0 mt-3" >
+                <div class="col-md-6 offset-md-6  clo-sm-12 offset-sm-0" *ngIf="(orderCofirmation)">
+                    {{orderCofirmation}} .
                 </div>
-                <div class="col-6 offset-6">
+                <div class="col-md-6  offset-md-6 clo-sm-12 offset-sm-0 p-0">
                     <app-order-totals></app-order-totals>
-                    <a (click)="passeOrder()" class="btn btn-outline-primary py-2 btn-bock">
+                    <a (click)="passeOrder()" class="btn btn-primary text-white py-2 btn-bock">
                         <!-- (click)="decrementItemQuatity(item)" routerLink="/checkout" -->
-                        Proceed to checkout
+                        Passe une commande
                     </a>
                 </div>
             </div>
