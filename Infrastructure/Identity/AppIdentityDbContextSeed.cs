@@ -13,21 +13,22 @@ namespace Infrastructure.Identity
             {
                 var user = new AppUser
                 {
-                    DisplayName="test",
-                    Email="test@gmail.com",
-                    UserName="test@gmail.com",
+                    DisplayName="admin",
+                    Email="admin@gmail.com",
+                    UserName="admin@gmail.com",
                     Adress = new Adress
                     {
-                        FirstName = "test",
-                        LastName ="testi",
-                        Street="10 cite cheby",
-                        City="manouba",
-                        State="tebourba",
-                        Zipcode="1133"
+                        FirstName = "admin",
+                        LastName ="technotips",
+                        Street="null",
+                        City="null",
+                        State="null",
+                        Zipcode="1001"
                     },
+                    Role="admin"
                     
                 };
-                await userManager.CreateAsync(user,"Pa$$w0rd");
+                await userManager.CreateAsync(user,"Admin@123");
             }
         }
     }

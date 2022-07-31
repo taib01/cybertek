@@ -1,0 +1,57 @@
+<form class="form-login shadow p-3 mb-5 bg-white rounded" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal text-primary"><strong>Espace d'administrateur</strong></h1>
+
+    </div>
+  
+    <div class="form-label-group">
+      <input  formControlName="email" type="email" id="inputEmail" class="form-control " placeholder="Email"  autofocus=""  >
+      <label for="inputEmail">Email</label>
+      <span class="text-danger"
+        *ngIf="loginForm.get('email').invalid 
+        && loginForm.get('email').touched
+        && loginForm.get('email').errors['required']">
+        Email est obligatoire
+      </span>
+      <span class="text-danger"
+        *ngIf="loginForm.get('email').invalid 
+        && loginForm.get('email').touched
+        && loginForm.get('email').errors['pattern']">
+        Votre email n'est pas valide
+      </span>
+    </div>
+  
+    <div class="form-label-group">
+      <input formControlName="passowrd" type="password" id="inputPassword" class="form-control" placeholder="Password" >
+      <label for="inputPassword">Mot de passe</label>
+      <span class="text-danger"
+        *ngIf="loginForm.get('passowrd').invalid 
+        && loginForm.get('passowrd').touched
+        && loginForm.get('passowrd').errors['required']  ">
+        Mot de passe est obligatoire
+      </span>
+    </div>
+    
+    <div class="checkbox mb-3">
+      <!--<label>
+        <input type="checkbox" value="remember-me"> Rappelle moi
+      </label>-->
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+
+
+    <div class="text-center" *ngIf="resMessage">
+      <p class="text-{{colorMessage}}">{{resMessage}}</p>
+    </div>
+    <div>
+     <!--
+       [ngClass]="{'email-inp': expression}"
+       [ngClass]="{ loginForm.get('passowrd').valid ? ' ' : 'is-invalid' : null}"
+      <p>Form status : {{loginForm.status}} </p>
+      <p>Email status : {{loginForm.get('email').status}}</p>
+      <p>Email Touched : {{loginForm.get('email').touched}}</p>
+      <p>Email Touched : {{loginForm.get('email').dirty}}</p>
+      <p>Email Touched : {{ (loginForm.value | json )}}</p>-->
+    </div>
+  </form>

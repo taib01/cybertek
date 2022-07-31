@@ -213,6 +213,7 @@ public async Task<ActionResult<List<ProductType>>> GetProductTypes()
 
         [HttpPut]
         public void PutProduct([FromBody]ProductToSendDto product ){
+
             var prodSaving=_mapper.Map<ProductToSendDto,Product>(product);
             _productRepo.putProduct(prodSaving);
         }

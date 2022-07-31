@@ -6,6 +6,7 @@ namespace Core.Entities.Identity
     {
         public string DisplayName { get; set; }
         public Adress Adress { get; set; }
-        
+        public string Role { get; set; }
+
     }
 }

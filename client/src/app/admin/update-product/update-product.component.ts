@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IBrand } from 'src/app/shared/models/productBrand';
 import { IType } from 'src/app/shared/models/productType';
@@ -13,8 +13,13 @@ import { AdminService } from '../admin.service';
 })
 export class UpdateProductComponent implements OnInit {
 
+  adminTest = localStorage.getItem("token-admin");
+
   public message : string  ; 
   public progress : number ; 
+
+  public ErrorMsg1 :string ;
+  public ErrorMsg2 :string ;
 
   productDetail : FormGroup ;
   private productType :string ; 
@@ -28,8 +33,8 @@ export class UpdateProductComponent implements OnInit {
     price: 0,
     quantity: 0,
     pictureUrl: "",
-    productTypeId: 0,
-    productBrandId: 0,
+    productTypeId: null,
+    productBrandId: null,
     productType:"",
     productBrand:""
   }
@@ -41,17 +46,17 @@ export class UpdateProductComponent implements OnInit {
   constructor( private serv :AdminService, builder :FormBuilder, private route : ActivatedRoute , http :HttpClient) { 
     
     this.productDetail=builder.group({
-      id: 0,
-      reference: "",
-      name: "",
-      description: "",
-      price: 0,
-      quantity: 0,
-      pictureUrl: "",
-      productTypeId: null,
-      productBrandId: null,
+      id: new FormControl(0), 
+      reference: [null,[Validators.required]],
+      name: [null,[Validators.required]],
+      description: [null,[Validators.required]],
+      price: [null,[Validators.required,Validators.pattern("^[0-9]+$")]],
+      quantity: [null,[Validators.required,Validators.pattern("^[0-9]+$")]],
       productType:"",
-      productBrand:""
+      productBrand:"",
+      productTypeId:null,
+      productBrandId:null,
+      
     });
 
     this.product.id=this.route.snapshot.params.id ;
@@ -96,8 +101,17 @@ export class UpdateProductComponent implements OnInit {
   }
 
   uploadfile(files) {
-    if (files.lenghth === 0 )
-    return ; 
+    if ( files.length === 0  ){
+      this.ErrorMsg1 = "Inserer un image";
+      setTimeout(()=>{ this.ErrorMsg1 = '' ;}, 2500);
+      return ; 
+    }
+    else if ( this.productDetail.invalid || this.product.productBrandId ==null||this.productBrand=="" ){
+      this.ErrorMsg2 = "Remlir tous les champs";
+      setTimeout(()=>{ this.ErrorMsg2 = '' ;}, 2500);
+      return ; 
+    }
+   
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file',fileToUpload,fileToUpload.name);

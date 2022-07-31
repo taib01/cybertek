@@ -1,0 +1,46 @@
+.upload{
+    font-weight: bold;
+    color: #247D68 ;
+    margin-left: 15px;
+    line-height: 36px ;
+}
+.form-product {
+    width: 95%;
+    //max-width: 66vw;
+    //padding: 25px !important ;
+    //margin: auto;
+    //margin-top: 0vh  ;
+    padding-left: 50px ;
+    padding-right: 50px ;
+
+    .b-r-n{
+        border-right: none !important;
+        border-top-right-radius: 0% !important;
+        border-bottom-right-radius: 0% !important;
+    }
+    .b-l-n{
+        border-left: none !important;
+        border-top-left-radius: 0% !important;
+        border-bottom-left-radius: 0% !important;
+        
+    }
+  }
+  @media only screen and (max-width: 768px) {
+
+    .form-signin {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      
+    }
+  }
+  .btn-brands-types{
+    height: 45px; margin-top: 2px; margin-bottom: 2px;
+  }
+
+  .tb-center{
+    display: flex !important;
+    
+    align-items: center !important;
+    justify-content: center !important;
+    width: 75px !important;
+  }

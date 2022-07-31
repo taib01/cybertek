@@ -1,38 +1,186 @@
-<p>update-product works!</p>
-<form [formGroup]="productDetail" (ngSubmit)="uploadfile(file.files)" >
-    <div class="row m-0 p-0">
-      <div class="col-10 m-0 justify-content-between">
-        <input  formControlName="id"  [(ngModel)]="product.id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
-        <input  formControlName="reference" [(ngModel)]="product.reference" type="text"  class="form-control " placeholder="refernce"    >
-        <input  formControlName="name" [(ngModel)]="product.name" type="text"  class="form-control " placeholder="name"    >
-        <input  formControlName="description" [(ngModel)]="product.description" type="text"  class="form-control " placeholder="description"    >
-        <input  formControlName="price" [(ngModel)]="product.price" type="number"  class="form-control " placeholder="price"    >
-        <input  formControlName="quantity" [(ngModel)]="product.quantity" type="number"  class="form-control " placeholder="quantity"    >
-        
-        <input  formControlName="productType" [(ngModel)]="productType" type="text"  class="form-control " placeholder="productType"    >
+<!-- <div class="form-product" >
+  <h3 class="text-center text-primary font-weight-bold my-2">Modifier le produit</h3>
+  <form [formGroup]="productDetail" (ngSubmit)="uploadfile(file.files)" >
+    
+    <div class="m-0 justify-content-between">
+      <input  formControlName="id"  [(ngModel)]="product.id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+      <input  formControlName="reference" [(ngModel)]="product.reference" type="text"  class="form-control " placeholder="refernce"    >
+      <input  formControlName="name" [(ngModel)]="product.name" type="text"  class="form-control " placeholder="name"    >
+      <input  formControlName="description" [(ngModel)]="product.description" type="text"  class="form-control " placeholder="description"    >
+      <input  formControlName="price" [(ngModel)]="product.price" type="number"  class="form-control " placeholder="price"    >
+      <input  formControlName="quantity" [(ngModel)]="product.quantity" type="number"  class="form-control " placeholder="quantity"    >
+      
+      <input  formControlName="productType" [(ngModel)]="productType" type="text"  class="form-control " placeholder="productType"    >
 
-        <select   formControlName="productTypeId"   [(ngModel)]="product.productTypeId"  name="productTypeId" class="form-control" id="PTIS" >
-          <option  value="" disabled selected> choose other type </option>
-          <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
-        </select>
+      <select   formControlName="productTypeId"   [(ngModel)]="product.productTypeId"  name="productTypeId" class="form-control" id="PTIS" >
+        <option  value="" disabled selected> choose other type </option>
+        <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
+      </select>
 
-        <input  formControlName="productBrand" [(ngModel)]="productBrand" type="text"  class="form-control " placeholder="productType"    >
+      <input  formControlName="productBrand" [(ngModel)]="productBrand" type="text"  class="form-control " placeholder="productType"    >
 
-        <select formControlName="productBrandId" [(ngModel)]="product.productBrandId"   name="productBrandId" class="form-control"  id="PBIS" >
-          <option  value="" disabled selected> choose other brand</option>
-          <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
-        </select>
+      <select formControlName="productBrandId" [(ngModel)]="product.productBrandId"   name="productBrandId" class="form-control"  id="PBIS" >
+        <option  value="" disabled selected> choose other brand</option>
+        <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
+      </select>
 
-        <div class="row">
-            <div> <input type="file" #file placeholder="choose file"  ></div>
-            <div class="p-2">
-                <img src="{{product.pictureUrl}}" alt="{{product.name}}"class="img-fluid" style="width:80px">
+      <div class="row">
+          <div> <input type="file" #file placeholder="choose file"  ></div>
+          <div class="p-2">
+              <img src="{{product.pictureUrl}}" alt="{{product.name}}"class="img-fluid" style="width:80px">
+          </div>
+      </div>
+    </div>
+    <button  class="btn btn-sm btn-success fa fa-check  ">enregistrer</button>
+  
+</form>
+</div> -->
+
+
+
+
+
+  <div class="row m-0 p-0 mb-5 align-items-center justify-content-center" *ngIf="adminTest">
+    
+      
+      <form [formGroup]="productDetail" (ngSubmit)="uploadfile(file.files)" class="form-product  shadow p-3 mb-5 bg-white rounded" >
+        <h3 class="text-center text-primary font-weight-bold my-2">Modification du produit</h3>
+        <div class="row m-0 p-0">
+          <div class="col-12 m-0 justify-content-between">
+            <input  formControlName="id"  [(ngModel)]="product.id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
+
+            <input  formControlName="reference" [(ngModel)]="product.reference" type="text"  class="form-control my-2" placeholder="Reference"    >
+            <span class="text-danger"
+              *ngIf="productDetail.get('reference').invalid  && productDetail.get('reference').touched  && productDetail.get('reference').errors['required']  ">
+               Reference est obligatoire
+            </span>
+
+            <input  formControlName="name" [(ngModel)]="product.name" type="text"  class="form-control " placeholder="Nom"    >
+            <span class="text-danger"
+              *ngIf="productDetail.get('name').invalid  && productDetail.get('name').touched  && productDetail.get('name').errors['required']  ">
+              Nom est obligatoire
+            </span>
+
+            <textarea  formControlName="description" [(ngModel)]="product.description"   class="form-control my-2" placeholder="description"    ></textarea>
+              
+            <span class="text-danger"
+              *ngIf="productDetail.get('description').invalid  && productDetail.get('description').touched  && productDetail.get('description').errors['required']  ">
+              Description est obligatoire
+            </span>
+
+            <input  formControlName="price" [(ngModel)]="product.price" type="number" min="0"  class="form-control my-2" placeholder="Prix"    >
+            <span class="text-danger"
+              *ngIf="productDetail.get('price').invalid  && productDetail.get('price').touched  && productDetail.get('price').errors['required']  ">
+              Prix est obligatoire et il doit étre un nombre positif
+            </span>
+            <span class="text-danger"
+              *ngIf="productDetail.get('price').invalid  && productDetail.get('price').touched  && productDetail.get('price').errors['pattern']  ">
+              Prix doit étre un nombre positif
+            </span>
+
+            <input  formControlName="quantity" [(ngModel)]="product.quantity" type="number"  class="form-control my-2" placeholder="Quantité"    >
+            <span class="text-danger"
+              *ngIf="productDetail.get('quantity').invalid  && productDetail.get('quantity').touched  && productDetail.get('quantity').errors['required']  ">
+               Quantité est obligatoire et il doit étre un nombre positif
+            </span>
+            <span class="text-danger"
+              *ngIf="productDetail.get('quantity').invalid  && productDetail.get('quantity').touched  && productDetail.get('quantity').errors['pattern']  ">
+              Quantité doit étre un nombre positif
+            </span>
+
+
+
+
+            <div class="row m-0 p-0">
+
+              <div class="col-md-5 col-sm-12 p-0 m-0 my-2 pr-3">
+                <div class="row m-0 p-0">
+                  <span class="  col-4 form-control b-r-n " >Actuelle catégorie :  </span>
+                  <input class="  col-8 form-control b-l-n bg-white " formControlName="productType" [(ngModel)]="productType" type="text"   placeholder="productType"   disabled >
+                </div>
+              </div>
+  
+              <div class="col-md-7  col-sm-12 p-0 m-0 my-2">
+                <div class="row m-0 p-0">
+                  <span class="  col-4 form-control b-r-n pr-0" >Choisir un nouveau categorie :</span>
+
+                  <select  class="  col-8 form-control b-l-n" formControlName="productTypeId"   [(ngModel)]="product.productTypeId"  name="productTypeId"  id="PTIS" >
+                    <option  value="" disabled selected> choose other type </option>
+                    <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
+                  </select>
+                </div>
+              </div>
+
             </div>
+
+
+
+<!--             <span class="text-danger"
+              *ngIf="newproduct.get('productTypeId').invalid  && newproduct.get('productTypeId').touched  && newproduct.get('productTypeId').errors['required']  ">
+              Catégorie est obligatoire
+            </span> -->
+            <div class="row m-0 p-0">
+
+              <div class="col-md-5 col-sm-12 p-0 m-0 my-2 pr-3">
+                <div class="row m-0 p-0">
+                  <span class="  col-4 form-control b-r-n" >Actuelle marque :  </span>
+                  <input class="  col-8 form-control b-l-n bg-white " formControlName="productBrand" [(ngModel)]="productBrand" type="text"   placeholder="productType" disabled   >
+                </div>
+              </div>
+  
+              <div class="col-md-7 col-sm-12 p-0 m-0 my-2">
+                <div class="row m-0 p-0">
+                  <span class="  col-4 form-control b-r-n" >Choisir un nouveau marque : </span>
+                  <select class="  col-8 form-control b-l-n" formControlName="productBrandId" [(ngModel)]="product.productBrandId"   name="productBrandId"   id="PBIS" >
+                    <option  value="" disabled selected> choose other brand</option>
+                    <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+<!--             <span class="text-danger"
+              *ngIf="newproduct.get('productBrandId').invalid  && newproduct.get('productBrandId').touched  && newproduct.get('productBrandId').errors['required']  ">
+              Marque est obligatoire
+             </span> -->
+            
+             <div class="row p-0 m-0 my-2">
+                <span class=" col-5 form-control b-r-n" >Actuelle image : <img src="{{product.pictureUrl}}" alt="{{product.name}}"class="img-fluid" style="width:80px"> </span>
+                
+                <input  class="col-7 form-control b-l-n justify-content-center align-items-center"  type="file" #file placeholder="any"  >
+                <div class="col-4">
+                  <span class="upload" *ngIf="progress > 0"> {{progress}}%</span>
+                  <span class="upload" *ngIf="message"> {{progress}}</span>
+                </div>
+                
+                <div class=" col-12 text-danger d-flex align-items-center justify-content-center text-center"*ngIf="ErrorMsg1">
+                  <span class="text-danger text-center">{{ErrorMsg1}}</span>
+                </div>
+             </div>
+             
+
+            <button  class="btn btn-primary form-control my-2">Enregistrer</button>
+            <div class="text-center pb-0">
+              <a routerLink="/admin" class=" mr-2 text-warning pb-0 " >Annuler</a>
+            </div>
+            <div class="text-danger align-items-center justify-content-center text-center"*ngIf="ErrorMsg2">
+              <span class="text-danger text-center">{{ErrorMsg2}}</span>
+            </div>
+          </div>
+
+
+
         </div>
 
-        <!--<input  formControlName="productTypeId" type="number"  class="form-control " placeholder="productType"    >-->
-        <!--<input  formControlName="productBrandId"  [(ngModel)]="product.productBrandId" type="number"  class="form-control " placeholder="productBrand"    >-->
-      </div>
-      <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+      </form>
+      
+      
     </div>
-  </form>
+
+
+
+  

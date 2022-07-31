@@ -8,5 +8,7 @@ $theme-colors: (
   "warning": #C67F10
 
 );
-
+body,html{
+  font-family:  Arial, sans-serif !important;
+}
 @import "node_modules/bootstrap/scss/bootstrap";

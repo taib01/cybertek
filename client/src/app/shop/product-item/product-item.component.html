@@ -1,20 +1,21 @@
 
     <div class="card mb-4 shadow-sm">
       <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
-      <img class="bd-placeholder-img card-img-top bg-light" width="100%" height="225" src="{{product.pictureUrl}}" />
-      <div class="card-body ">
-            <a class="d-flex justify-content-center" routerLink="/shop/{{product.id}}" ><h5 class="text-uppercae text-align-center color_1">{{product.name}}</h5></a>
-            <div class="row justify-content-between px-2">
+      <img class="bd-placeholder-img card-img-top  p-3" width="100%" height="225" src="{{product.pictureUrl}}" />
+      <div class="card-body " style="height: 160px;" >
+            <a   style="height: 50px;" class="d-flex justify-content-center text-center" routerLink="/shop/{{product.id}}" ><h6 class="text-uppercae text-align-center color_1">{{product.name.substring(0,45)+"..."}}</h6></a>
+            <div class="d-flex justify-content-center mt-2">
+                <strong class="text-warning"> {{ product.price}} TND</strong>
+           </div>
+            <div class="row justify-content-between p-2">
+
+
+                
+                    <button (click)="addItemToBasket()" class=" col-6 btn btn-sm btn-outline-primary fa fa-shopping-cart"></button>
+                    <button  routerLink="/shop/{{product.id}}" type="button" class="col-6 btn btn-sm btn-outline-primary fa fa-eye "></button>
+                
             
 
-                <div class="btn-group ">
-                    <button (click)="addItemToBasket()" class="btn btn-sm btn-outline-secondary fa fa-shopping-cart"></button>
-                    <button  routerLink="/shop/{{product.id}}" type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                </div>
-            
-                <div>
-                     <strong class="text-warning">TND {{ product.price}}</strong>
-                </div>
 
             </div>
         </div>

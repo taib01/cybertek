@@ -8,11 +8,12 @@ import { SharedModule } from '../shared/shared.module';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { AppComponent } from '../app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, UpdateProfileComponent],
+  declarations: [LoginComponent, RegisterComponent, UpdateProfileComponent, LoginAdminComponent],
   imports: [
     CommonModule,
     AccountRoutingModule  ,

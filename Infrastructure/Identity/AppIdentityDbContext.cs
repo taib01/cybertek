@@ -10,6 +10,8 @@ namespace Infrastructure.Identity
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {       
         }
+
+        //public DbSet<Role> Roles { get; set; }
         //public DbSet<AppUser> AspNetUsers { get; set; }
         //public DbSet<Adress> Adresses { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

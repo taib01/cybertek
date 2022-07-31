@@ -10,7 +10,10 @@ import { AdminService } from '../admin.service';
 })
 export class UpdateTypeComponent implements OnInit {
 
+  adminTest = localStorage.getItem("token-admin"); 
+
   typeDetail : FormGroup ;
+  msgErreur :string; 
 
   private type = {
       id: "" ,
@@ -31,6 +34,12 @@ export class UpdateTypeComponent implements OnInit {
   }
 
   updatetype(){
+    if(this.type.name == "" )
+    {
+      this.msgErreur = "Inserer la catégorie"
+      setTimeout(()=>{ this.msgErreur  = '' ;}, 2500);
+      return;
+    }
     this.serv.updateType(this.type);
   }
 }

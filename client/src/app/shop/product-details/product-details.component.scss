@@ -1,0 +1,10 @@
+.taille-image-detail{
+    width: 500px;
+}
+@media only screen and (max-width: 768px) {
+
+    .taille-image-detail{
+        width: 200px;
+        margin: auto !important;
+    }
+  }

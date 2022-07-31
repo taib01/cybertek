@@ -5,22 +5,26 @@
   },
   {
     "Id": 2,
-    "Name": "Acer"
-  },
-  {
-    "Id": 3,
     "Name": "Dell"
   },
   {
-    "Id": 4,
-    "Name": "Packard Bell"
+    "Id": 3,
+    "Name": "Acer"
   },
   {
     "Id": 5,
-    "Name": "Samsung"
+    "Name": "MSI"
+  },
+    {
+    "Id": 6,
+    "Name": "Lenovo"
   },
   {
-    "Id": 6,
-    "Name": "Nokia"
+    "Id": 7,
+    "Name": "Tecnhotips"
+  },
+    {
+    "Id": 8,
+    "Name": "Sumsung"
   }
 ]

@@ -1,5 +1,6 @@
 <div class="container mt-5" *ngIf="orders">
-    <div class="table-responsive shadow-sm">
+    <h1 class="text-center text-primary font-weight-bold my-2 tb-mt">Historique des commandes </h1>
+    <div class="table-responsive shadow-sm ">
         <table class="table table-striped p-2 ">
             <thead class="bg-primary text-uppercase text-left text-white">
                 <tr>
@@ -7,13 +8,13 @@
                         <div class="py-2 px-0 "> Id</div>
                     </th>
                     <th class="border-0 " scope="col">
-                        <div class="py-2 px-0 "> Numero Telephone</div>
+                        <div class="py-2 px-0 "> Numero de Telephone</div>
                     </th>
                     <th class="border-0 " scope="col">
                         <div class="py-2 px-0 "> Date de commande</div>
                     </th>
                     <th class="border-0 " scope="col">
-                        <div class="py-2 px-0 "> Adress</div>
+                        <div class="py-2 px-0 "> Adresse</div>
                     </th>
                     <th class="border-0 " scope="col">
                         <div class="py-2 px-0 "> Total</div>
@@ -26,19 +27,22 @@
                     
                 </tr>
             </thead>
-            <tbody class="">
-                <tr *ngFor="let item of orders">
+            <tbody class="m-0">
+                <tr *ngFor="let item of orders" [routerLink]="['/order/details', { id: item.customerBasketId }]" style="cursor: pointer;">
                     <td><strong>{{ item.id }}</strong></td>
                     <td>{{ item.numeroClient }}</td>
                     <td class="align-middle"><strong>{{ item.date }}</strong></td>
                     <td class="align-middle"> {{ item.adressClient }}</td>
                     <td class="align-middle"><strong>{{ item.total }} TND</strong></td>
-                    <td class="align-middle"><strong>{{ item.state }} </strong></td>
+
+                    <td class="align-middle" *ngIf="item.state =='En attente' " ><strong class="text-warning">{{ item.state }} </strong></td>
+                    <td class="align-middle" *ngIf="item.state =='Confirmé' " ><strong class="text-primary">{{ item.state }} </strong></td>
+                    <td class="align-middle" *ngIf="item.state =='Annulé' " ><strong class="text-danger">{{ item.state }} </strong></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
 <div class="container mt-5 text-center" *ngIf="orders.length===0">
-    <h1>you dont have any orders</h1>
+    <h3 class="text-warning">Vous n'avez pas des commandes</h3>
 </div>

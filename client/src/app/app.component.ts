@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AccountService } from './account/account.service';
 import { BasketService } from './basket/basket.service';
+import { Admin } from './shared/models/admin';
 
 
 @Component({
@@ -10,10 +12,20 @@ import { BasketService } from './basket/basket.service';
 })
 export class AppComponent implements OnInit {
   title = 'Client';
+ // private testAdmin = new BehaviorSubject<string>(null);
+  private testAdmin = localStorage.getItem("token-admin");
 
-  constructor(private basketservice : BasketService, private accountService : AccountService) {}
+   
+
+  constructor(private basketservice : BasketService, private accountService : AccountService) {
+  
+  }
 
   ngOnInit(): void {
+
+    //this.testAdmin.next(localStorage.getItem("token-admin"));
+    console.log(this.testAdmin);
+    //this.admin=localStorage.getItem("token-admin");
     this.loadUser();
     this.loadBasket();
     

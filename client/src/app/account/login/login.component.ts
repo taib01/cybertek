@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   {
     if (this.loginForm.valid)
     {
-
+        this.loginForm.value.email=this.loginForm.value.email.toLowerCase() ; 
         this.accountService.login(this.loginForm.value).subscribe( () =>
         {
           this.router.navigateByUrl(this.returnUrl);

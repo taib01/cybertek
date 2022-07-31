@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 //import { EventEmitter } from 'protractor';
 import { IProduct } from '../shared/models/product';
 import { IBrand } from '../shared/models/productBrand';
@@ -16,28 +16,23 @@ import { AdminService } from './admin.service';
 })
 export class AdminComponent implements OnInit {
   
+  ErrorMsg1 :string ;
+  ErrorMsg2 :string ;
+  ErrorMsg3 :string ;
+  adminTest =localStorage.getItem("token-admin");
+
   newbrand = new FormGroup({
     id: new FormControl(0), 
-    name: new FormControl('')
+    name: new FormControl(null)
   });
 
   newtype = new FormGroup({
     id: new FormControl(0), 
-    name: new FormControl('')
+    name: new FormControl(null)
   });
 
-  newproduct = new FormGroup({
-    // badelt l Id b id *** 
-    id: new FormControl(0), 
-    reference: new FormControl(''),
-    name: new FormControl(''),
-    description: new FormControl(''),
-    price: new FormControl(''),
-    quantity: new FormControl(''),
-    pictureUrl: new FormControl(''),
-    productTypeId: new FormControl(''),
-    productBrandId: new FormControl('')
-  });
+  newproduct :FormGroup ;
+
   
   public message : string  ; 
   public progress : number ; 
@@ -52,18 +47,37 @@ export class AdminComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount: number ; 
   sortOption = [
-    {name : 'Alphabetical' , value : 'name'},
-    {name : 'Price: Low to High' , value : 'priceAsc'},
-    {name : 'Price: High to Low' , value : 'priceDesc'},
+    {name : 'Alphabétique' , value : 'name'},
+    {name : 'Prix : ​​Croissant' , value : 'priceAsc'},
+    {name : 'Prix : Décroissant' , value : 'priceDesc'},
   ]
   @ViewChild('search',{static:true}) searchTerm:ElementRef;
 
-  constructor(private  adminService : AdminService ,private http : HttpClient) { }
+  constructor(private  adminService : AdminService ,private http : HttpClient ,private builder : FormBuilder) { }
 
   ngOnInit() {
     this.getProducts();
     this.getBrands();
     this.getTypes();
+    this.createNewProductForm();
+
+
+  }
+
+  createNewProductForm(){
+    this.newproduct = this.builder.group({
+      // badelt l Id b id *** 
+      id: new FormControl(0), 
+      reference: [null,[Validators.required]],
+      name:[null,[Validators.required]],
+      description:[null,[Validators.required]],
+      price: [null,[Validators.required,Validators.pattern("^[0-9]+$")]],
+      quantity:[null,[Validators.required,Validators.pattern("^[0-9]+$")]],
+      pictureUrl: new FormControl(""), 
+      productTypeId: [null,[Validators.required]],
+      productBrandId: [null,[Validators.required]]
+      //file:[null]
+    });
   }
 
   getProducts(){
@@ -82,7 +96,7 @@ export class AdminComponent implements OnInit {
   getBrands(){
     this.adminService.getBrands().subscribe((response)=>
     {
-      this.brands =[{id:0,name:'All'}, ...response];
+      this.brands =[{id:0,name:'Le tout'}, ...response];
       this.brandsForProduct=[...response];
       this.adminService.brandsForProduct=[...response];
     },error =>
@@ -94,7 +108,7 @@ export class AdminComponent implements OnInit {
   getTypes(){
     this.adminService.getTypes().subscribe((response)=>
     {
-      this.types = [{id:0,name:'All'}, ...response];
+      this.types = [{id:0,name:'Le tout'}, ...response];
       this.typesForProduct=[...response];
       this.adminService.typesForProduct=[...response];
     },error =>
@@ -162,36 +176,56 @@ export class AdminComponent implements OnInit {
   }
 
   addbrand(){
-    this.adminService.addBrand(this.newbrand.value) ; 
-    window.location.reload();
+    if (this.newbrand.value.name === null){
+      this.ErrorMsg2= "Inserer la marque";
+      setTimeout(()=>{ this.ErrorMsg2 = '' ;}, 2500);
+      return;
+    }else{
+      this.adminService.addBrand(this.newbrand.value) ; 
+      window.location.reload();
+    }
+
     
   }
   addtype(){
-    this.adminService.addType(this.newtype.value) ; 
-    window.location.reload();
+    if (this.newtype.value.name === null){
+      this.ErrorMsg3= "Inserer la catégorie";
+      setTimeout(()=>{ this.ErrorMsg3 = '' ;}, 2500);
+      return;
+    }else{
+      this.adminService.addType(this.newtype.value) ; 
+      window.location.reload();
+    }
+
   }
 
   uploadfile(files) {
-    if (files.lenghth === 0 )
+    if (files.length === 0 || this.newproduct.invalid){
+     this.ErrorMsg1= "Remplir tous les champs";
+     setTimeout(()=>{ this.ErrorMsg1 = '' ;}, 2500);
     return ; 
-    let fileToUpload = <File>files[0];
-    const formData = new FormData();
-    //formData.append('product',this.newproduct.value);
-    formData.append('file',fileToUpload,/* this.adminService.getDate()+ */fileToUpload.name);
-    this.adminService.uploadFile(formData)
-    .subscribe(event =>{
-      if (event.type === HttpEventType.UploadProgress){
-        this.progress = Math.round(100* event.loaded / event.total);
-      }
-      else if ( event.type === HttpEventType.Response){
-        this.message = 'Uploas success.';
-       //this.onUploadFinished.emit(event.body);
-      }
-    });
-    this.newproduct.value.pictureUrl = fileToUpload.name;
-    this.newproduct.value.pictureUrl =  /* this.adminService.getDate()+ */this.newproduct.value.pictureUrl ;
-    this.adminService.addProduct(this.newproduct.value);
-    window.location.reload();
+    }
+    else{
+      let fileToUpload = <File>files[0];
+      const formData = new FormData();
+      //formData.append('product',this.newproduct.value);
+      formData.append('file',fileToUpload,/* this.adminService.getDate()+ */fileToUpload.name);
+      this.adminService.uploadFile(formData)
+      .subscribe(event =>{
+        if (event.type === HttpEventType.UploadProgress){
+          this.progress = Math.round(100* event.loaded / event.total);
+        }
+        else if ( event.type === HttpEventType.Response){
+          this.message = 'Uploas success.';
+         //this.onUploadFinished.emit(event.body);
+        }
+      });
+      this.newproduct.value.pictureUrl = fileToUpload.name;
+      this.newproduct.value.pictureUrl =  /* this.adminService.getDate()+ */this.newproduct.value.pictureUrl ;
+      this.adminService.addProduct(this.newproduct.value);
+      window.location.reload();
+    }
+
   }
   
 

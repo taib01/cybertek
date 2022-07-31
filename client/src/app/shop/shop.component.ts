@@ -21,9 +21,9 @@ export class ShopComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount: number ; 
   sortOption = [
-    {name : 'Alphabetical' , value : 'name'},
-    {name : 'Price: Low to High' , value : 'priceAsc'},
-    {name : 'Price: High to Low' , value : 'priceDesc'},
+    {name : 'Alphabétique' , value : 'name'},
+    {name : 'Prix : ​​Croissant' , value : 'priceAsc'},
+    {name : 'Prix : Décroissant' , value : 'priceDesc'},
   ]
   @ViewChild('search',{static:true}) searchTerm:ElementRef;
 

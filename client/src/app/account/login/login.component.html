@@ -1,6 +1,6 @@
 <form class="form-login shadow p-3 mb-5 bg-white rounded" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-normal"><strong>Connexion</strong></h1>
+      <h1 class="h3 mb-3 font-weight-normal text-primary"><strong>Connexion</strong></h1>
 
     </div>
   
@@ -37,7 +37,15 @@
         <input type="checkbox" value="remember-me"> Rappelle moi
       </label>-->
     </div>
+
     <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+    <div class="text-center pb-0">
+      <a routerLink="/account/login" class="btn  mr-2 text-secondary pb-0 " >Mot de passe oublié</a>
+    </div>
+    <div class="text-center">
+      <a routerLink="/account/register" class="btn  mr-2 text-primary font-weight-bold" >Inscription</a>
+    </div>
+
     <div class="text-center" *ngIf="resMessage">
       <p class="text-{{colorMessage}}">{{resMessage}}</p>
     </div>

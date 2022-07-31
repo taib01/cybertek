@@ -1,21 +1,29 @@
+<div *ngIf="adminTest==null">
+<h1 class="text-center text-warning font-weight-bold"><span style="font-size : 100px;">Oops</span><br>  Vous n'êtes pas autorisé  </h1>
+</div>
 
-<h1>admin  Page </h1>
-<div class="container">
-  <div class="row mt-5">
+<div *ngIf="adminTest" class="px-5">
+  <h1 class="text-center text-primary font-weight-bold my-2 tb-mt">Gestion des produits </h1>
+  <div class="row m-0 p-0 mt-5">
 
 
-    <section class="col-3 ">
-          <h4 class="text-warning ml-3">Sort</h4>
-          <select name="" id="" class="custom-select" (change)="onSortSelected($event.target.value)">
-            <option *ngFor="let sort of sortOption" [value]="sort.value">{{sort.name}}</option>
-          </select>
-  
-          <h4 class="text-warning ml-3 mt-3 ">Brands</h4>
-          <div class="row">
-            
-              <ul class="list-group col-10 m-0">
-                <li class="list-group-item  "
-                  style="height: 50px;"
+    <section class="col-4 ">
+          <div class="row  m-0 align-items-center">
+            <h6 class="col-4 text-primary "> <strong>Trié</strong> </h6>
+              
+              
+            <select name="" id="" class="custom-select col-8 form-control b-r-n" (change)="onSortSelected($event.target.value)">
+              <option *ngFor="let sort of sortOption" [value]="sort.value" class="form-control b-r-n">{{sort.name}}</option>
+            </select>
+          </div>
+
+          <div class="col-12 bg-dark rounded-top pl-3 ">
+            <h4  class="text-left text-white text-uppercase p-0  py-2 m-0 mt-3 mr-3  "> <strong>Marques</strong> </h4>
+          </div>
+          <div class="row p-0 m-0">
+
+              <ul class=" list-group col-10  m-0">
+                <li class="list-group-item rounded-0" style="height: 50px; cursor:pointer;"
                  *ngFor="let brand of brands"
                   [class.active]="brand.id===this.shopParams.brandId"
                   [value]="brand.id"
@@ -23,79 +31,114 @@
                    >
                      {{brand.name}}  
                 </li>
+
               </ul>
-            
-            <div class="col-4 m-0">
-              <button class="btn btn-sm btn-danger float-right fa fa-trash "
-              style="height: 50px;"
-                *ngFor="let brand of brands"
-                (click)="deletebrand(brand.id)">
-               </button>
+              <div class="col p-0 m-0">
+                <span  class=" col-12 m-0 p-0 btn  bg-white rounded-0 text-primary font-weight-bold p-0 m-0 pt-3 text-center" style="height: 50px;"> Actions</span>
+                <div class="row p-0 m-0"> 
+                  <div class="col-6 m-0 p-0">
 
-               <button class="btn btn-sm btn-danger float-right fa fa-cog "
-               style="height: 50px;"
-                 *ngFor="let brand of brands"
-                 [routerLink]="['/admin/updatebrand', { id: brand.id , name : brand.name }]">
-                </button>
-            </div>
-
+                    <button class="btn btn-sm btn-danger float-right fa fa-trash btn-brands-types "
+                          *ngFor="let brand of brandsForProduct"
+                          (click)="deletebrand(brand.id)">
+                    </button>
+                  </div>
+                  <div class="col-6 m-0 p-0">
+                      <!-- <span  class=" btn btn-sm bg-white" style="height: 50px;"> </span> --> 
+                      <button class="btn btn-sm btn-warning float-right fa fa-cog btn-brands-types"
+                            *ngFor="let brand of brandsForProduct"
+                            [routerLink]="['/admin/updatebrand', { id: brand.id , name : brand.name }]">
+                        </button>
+                  </div>   
+                </div>
+            </div>       
           </div>
-
-            
           
 
-          <form [formGroup]="newbrand" (ngSubmit)="addbrand()" >
-            <div class="row m-0 p-0">
-              <div class="col-10 m-0 justify-content-between">
-                <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
-                <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
+            <form [formGroup]="newbrand" (ngSubmit)="addbrand()" >
+              <div class="row m-0 p-0">
+                  <div class="col-10 pr-3 m-0 p-0">
+                    <input  formControlName="id" type="hidden"  placeholder="id"  value="0"   >
+                    <input  formControlName="name" type="text"  class="form-control  " placeholder="Ajouter une nouvelle marque"    >
+                  </div>
+                  <div class="col-2  text-center">
+                    <button  class="btn btn-sm btn-primary fa  fa-check "></button>
+                  </div>
+                  <div class=" col-12 text-danger align-items-center justify-content-center text-center"
+                        *ngIf="ErrorMsg2">
+                        <span class="text-danger text-center">{{ErrorMsg2}}</span>
+                  </div>
               </div>
-              <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+            </form>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+            <div class="col-12 bg-dark rounded-top pl-3 ">
+            <h4  class="text-left text-white text-uppercase p-0  py-2 m-0 mt-3 mr-3  "> <strong>Categories</strong> </h4>
+          </div>
+          <div class="row p-0 m-0">
+
+              <ul class=" list-group col-10  m-0">
+                <li class="list-group-item rounded-0" style="height: 50px;  cursor:pointer;"
+                   *ngFor="let type of types"
+                   [class.active]="type.id===this.shopParams.typeId"
+                   [value]="type.id"
+                   (click)="onTypeSelected(type.id)">
+                   {{type.name}}
+                </li>
+
+              </ul>
+              <div class="col p-0 m-0">
+                <span  class=" col-12 m-0 p-0 btn  bg-white rounded-0 text-primary font-weight-bold p-0 m-0  pt-3 text-center" style="height: 50px;"> Actions</span>
+                <div class="row p-0 m-0"> 
+                  <div class="col-6 m-0 p-0">
+
+                    <button class="btn btn-sm btn-danger  fa fa-trash btn-brands-types"
+                      *ngFor="let type of typesForProduct"
+                      (click)="deletetype(type.id)">
+                    </button>
+                  </div>
+                  <div class="col-6 m-0 p-0">
+                      <!-- <span  class=" btn btn-sm bg-white" style="height: 50px;"> </span> --> 
+                      <button class="btn btn-sm btn-warning fa fa-cog btn-brands-types"
+                        *ngFor="let type of typesForProduct"
+                        [routerLink]="['/admin/updatetype', { id: type.id , name : type.name }]">
+                       </button>
+                  </div>   
+                </div>
+            </div>       
+          </div>
+          
+
+          <form [formGroup]="newtype" (ngSubmit)="addtype()" >
+            <div class="row m-0 p-0">
+              <div class="col-10 pr-3 m-0 p-0">
+                <input  formControlName="id" type="hidden"   placeholder="id"  value="0"   >
+                <input  formControlName="name" type="text"  class="form-control " placeholder="Ajouter une nouvelle catégorie"  >
+              </div>
+              <div class="col-2 text-center m-0 p-0">
+                <button  class="btn btn-sm btn-primary  fa fa-check  m-0  "></button>
+              </div> 
+              <div class=" col-12 text-danger align-items-center justify-content-center text-center"
+              *ngIf="ErrorMsg3">
+                <span class="text-danger text-center">{{ErrorMsg3}}</span>
+              </div>
             </div>
           </form>
+          
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-        <h4 class="text-warning ml-3 mt-3">Types</h4>
-        <div class="row">
-          <ul class="list-group col-10 m-0">
-            <li class="list-group-item " style="height: 50px;"
-              *ngFor="let type of types"
-              [class.active]="type.id===this.shopParams.typeId"
-              [value]="type.id"
-              (click)="onTypeSelected(type.id)">
-                {{type.name}}
-            </li>
-          </ul>
 
-        <div class="col-2 ">
-            <button class="btn btn-sm btn-danger float-right fa fa-trash "
-            style="height: 50px;"
-              *ngFor="let type of types"
-              (click)="deletetype(type.id)">
-             </button>
-             <button class="btn btn-sm btn-danger float-right fa fa-cog "
-             style="height: 50px;"
-               *ngFor="let type of types"
-               [routerLink]="['/admin/updatetype', { id: type.id , name : type.name }]">
-              </button>
-             
-            </div>
-        </div>
+          
 
-        <form [formGroup]="newtype" (ngSubmit)="addtype()" >
-          <div class="row m-0 p-0">
-            <div class="col-10 m-0 justify-content-between">
-              <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
-              <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
-            </div>
-            <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
-          </div>
-        </form>
+      
+
+
 
     </section>
 
 
-    <section class="col-9">
+    <section class="col-8 m-0">
 
       <div class="d-flex justify-content-between align-items-center pb-2">
         
@@ -106,9 +149,9 @@
         ></app-paging-header>
 
         <div class="form-inline">
-          <input  (keyup.enter)="onSearch()" #search type="text" class="form-control mr-2" style="width:300px" placeholder="Search">
-          <button (click)="onSearch()" class="btn btn-outline-success ml-2">Search</button>
-          <button (click)="onReset()"class="btn btn-outline-success ml-2">Reset</button>
+          <input  (keyup.enter)="onSearch()" #search type="text" class="form-control mr-2" style="width:300px" placeholder="Nom de produit">
+          <button (click)="onSearch()" class="btn btn-outline-primary ml-2">Chercher</button>
+          <button (click)="onReset()"class="btn btn-outline-primary ml-2">Annuler</button>
         </div>
       </div>
 
@@ -118,36 +161,40 @@
         </div>
       </div>-->
 
-      <div class="container mt-5">
-        <h3> <strong>Listes des Produits</strong> </h3>
+      <div class="mt-2">
+        <h4  class="text-center bg-dark text-white text-uppercase py-2 m-0 rounded-top"> <strong>Produits</strong> </h4>
         <div class="table-responsive">
-            <table class="table table-striped ">
-                <thead>
+            <table class="table rounded">
+                <thead  class="bg-primary text-uppercase text-left text-white ">
                     <tr>
-                        <th class="border-0 bg-light" scope="col">
-                            <div class=" py-3 text-uppercase"> Id</div>
+                        <th class="border-0" scope="col">
+                          <div class=" py-1 px-0"> Image</div>
                         </th>
-                        <th class="border-0 bg-light" scope="col">
-                            <div class=" py-3 text-uppercase"> Nom de Produit</div>
+                        <th class="border-0" scope="col">
+                            <div class=" py-1 px-0"> Id</div>
                         </th>
-                        <th class="border-0 bg-light" scope="col">
-                            <div class=" py-3 text-uppercase"> Prix</div>
+                        <th class="border-0" scope="col">
+                            <div class=" py-1 px-0"> Nom de Produit</div>
                         </th>
-                        <th class="border-0 bg-light" scope="col">
-                            <div class=" py-3 text-uppercase"> Action</div>
+                        <th class="border-0" scope="col">
+                            <div class=" py-1 px-0"> Prix</div>
+                        </th>
+                        <th class="border-0" scope="col">
+                            <div class=" py-1 px-0"> Actions</div>
                         </th>
                     </tr>
                 </thead>
                 <tbody class="">
                     <tr *ngFor="let item of products">
+                        <td><img src="{{item.pictureUrl}}" alt="{{item.productName}}"class="img-fluid" style="width:80px"></td>
                         <td><strong>{{ item.id }}</strong></td>
-                        <td>{{ item.name }}</td>
+                        <td style="max-width:250px;">{{ item.name }}</td>
                         <td class="align-middle"><strong>{{item.price }}</strong></td>
                         <td class="align-middle text-align-center"> 
                           <button  (click)="deleteproduct(item.id)"class="btn btn-sm btn-danger fa fa-trash"></button>
                           <button  routerLink="/shop/{{item.id}}" class="btn btn-sm btn-secondary fa fa-info-circle ml-2"></button>
-                          <button class="btn btn-sm btn-danger float-right fa fa-cog "
-                          style="height: 50px;"
+                          <button class="btn btn-sm btn-warning ml-2 fa fa-cog "
+                          
                             
                             
                             [routerLink]="['/admin/updateproduct', { id : item.id , reference : item.reference ,
@@ -173,37 +220,98 @@
 
       </div>
       <div class="row mb-5" >
-        <div class="col-6">
+        <div class="col-12">
           <!--<input type="file" #file placeholder="choose file" (change)="uploadFile(file.files)" >-->
           <!--<button class="btn btn-success" (click)="file.click()">Upload File</button>-->
           <!-- (ngSubmit)="addtype()"  -->
-          <form [formGroup]="newproduct" (ngSubmit)="uploadfile(file.files)" >
+          
+          <form [formGroup]="newproduct" (ngSubmit)="uploadfile(file.files)" class="form-product  shadow p-3 mb-5 bg-white rounded" >
+            <h3 class="text-center text-primary font-weight-bold my-2">Ajouter un nouveau produit</h3>
             <div class="row m-0 p-0">
-              <div class="col-10 m-0 justify-content-between">
+              <div class="col-12 m-0 justify-content-between">
                 <input  formControlName="id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
-                <input  formControlName="reference" type="text"  class="form-control " placeholder="refernce"    >
-                <input  formControlName="name" type="text"  class="form-control " placeholder="name"    >
-                <input  formControlName="description" type="text"  class="form-control " placeholder="description"    >
-                <input  formControlName="price" type="number"  class="form-control " placeholder="price"    >
-                <input  formControlName="quantity" type="number"  class="form-control " placeholder="quantity"    >
-                <select class="form-control" formControlName="productTypeId" name="productTypeId" id="" >
-                  <option  value="" disabled>choose type</option>
-                  <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
-                </select>
+
+                <input  formControlName="reference" type="text"  class="form-control my-2" placeholder="Reference"    >
+                <span class="text-danger"
+                  *ngIf="newproduct.get('reference').invalid  && newproduct.get('reference').touched  && newproduct.get('reference').errors['required']  ">
+                   Reference est obligatoire
+                </span>
+                <input  formControlName="name" type="text"  class="form-control " placeholder="Nom"    >
+                <span class="text-danger"
+                  *ngIf="newproduct.get('name').invalid  && newproduct.get('name').touched  && newproduct.get('name').errors['required']  ">
+                  Name est obligatoire
+                </span>
+                <input  formControlName="description" type="text"  class="form-control my-2" placeholder="description"    >
+                <span class="text-danger"
+                  *ngIf="newproduct.get('description').invalid  && newproduct.get('description').touched  && newproduct.get('description').errors['required']  ">
+                  Description est obligatoire
+                </span>
+                <input  formControlName="price" type="number" min="0"  class="form-control my-2" placeholder="Prix"    >
+                <span class="text-danger"
+                  *ngIf="newproduct.get('price').invalid  && newproduct.get('price').touched  && newproduct.get('price').errors['required']  ">
+                  Prix est obligatoire et il doit étre un nombre positif
+                </span>
+                <span class="text-danger"
+                  *ngIf="newproduct.get('price').invalid  && newproduct.get('price').touched  && newproduct.get('price').errors['pattern']  ">
+                  Prix doit étre un nombre positif
+                </span>
+                <input  formControlName="quantity" type="number"  class="form-control my-2" placeholder="Quantité"    >
+                <span class="text-danger"
+                  *ngIf="newproduct.get('quantity').invalid  && newproduct.get('quantity').touched  && newproduct.get('quantity').errors['required']  ">
+                   Quantité est obligatoire et il doit étre un nombre positif
+                </span>
+                <span class="text-danger"
+                  *ngIf="newproduct.get('quantity').invalid  && newproduct.get('quantity').touched  && newproduct.get('quantity').errors['pattern']  ">
+                  Quantité doit étre un nombre positif
+                </span>
+                <div class="row p-0 m-0">
+                  <span class=" col-6 form-control b-r-n" >Catégorie : </span>
+                  <select class="col-6 form-control b-l-n" formControlName="productTypeId" name="productTypeId" id="productTypeId" >
+                    <option   *ngFor="let type of typesForProduct" value="{{type.id}}">{{type.name}}</option>
+                  </select>
+                </div>
+                <span class="text-danger"
+                  *ngIf="newproduct.get('productTypeId').invalid  && newproduct.get('productTypeId').touched  && newproduct.get('productTypeId').errors['required']  ">
+                  Catégorie est obligatoire
+                </span>
                 
+
+  
+                <div class="row p-0 m-0 my-2">
+                  <span class=" col-6 form-control b-r-n" >Marque : </span>
+                  <select class="col-6 form-control b-l-n" formControlName="productBrandId" name="productBrandId" id="" >
+                    <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
+                  </select>
+                </div>
+                <span class="text-danger"
+                  *ngIf="newproduct.get('productBrandId').invalid  && newproduct.get('productBrandId').touched  && newproduct.get('productBrandId').errors['required']  ">
+                  Marque est obligatoire
+                 </span>
+                
+                 <div class="row p-0 m-0 my-2">
+                  <span class=" col-6 form-control b-r-n" >Image : </span>
+                  <input  class="col-6 form-control b-l-n"  type="file" #file placeholder="any"  >
+                 </div>
+                 
+<!--                  <span class="text-danger"
+                 *ngIf="newproduct.get('file').invalid  && newproduct.get('file').touched  && newproduct.get('file').errors['required']  ">
+                 Image est obligatoire
+                </span> -->
                 <!--<input  formControlName="productTypeId" type="number"  class="form-control " placeholder="productType"    >-->
                 <!--<input  formControlName="productBrandId" type="number"  class="form-control " placeholder="productBrand"  >  -->
-                <select class="form-control" formControlName="productBrandId" name="productBrandId" id="" >
-                  <option  value="" disabled>choose brand</option>
-                  <option   *ngFor="let brand of brandsForProduct" value="{{brand.id}}">{{brand.name}}</option>
-                </select>
+
+                <button  class="btn btn-primary form-control my-2">Enregistrer</button>
               </div>
-              <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+
 
             </div>
+            <div class="text-danger align-items-center justify-content-center text-center"
+              *ngIf="ErrorMsg1">
+              <span class="text-danger text-center">{{ErrorMsg1}}</span>
+           </div>
           </form>
-          <input type="file" #file placeholder="choose file"  >
-          <button class="btn btn-success" (click)="uploadfile(file.files)">Upload File</button>
+          
+          <!-- <button class="btn btn-success" (click)="uploadfile(file.files)">Upload File</button> -->
         </div>
         <div class="col-4">
           <span class="upload" *ngIf="progress > 0"> {{progress}}%</span>

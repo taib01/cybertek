@@ -1,10 +1,27 @@
-<p>update-brand works!</p>
-<form [formGroup]="brandDetail" (ngSubmit)="updatebrand()" >
+
+<!-- <form [formGroup]="brandDetail" (ngSubmit)="updatebrand()" >
     <div class="row m-0 p-0">
       <div class="col-10 m-0 justify-content-between">
         <input  formControlName="id" [(ngModel)]="brand.id" type="hidden"  class=" col-10 form-control " placeholder="id"  value="0"   >
         <input  formControlName="name"[(ngModel)]="brand.name" type="text"  class="form-control " placeholder="name"    >
       </div>
       <button  class="btn btn-sm btn-success fa fa-check col-2 float-right "></button>
+    </div>
+  </form> -->
+
+  <form class="form-update-brand shadow p-3 mb-5 bg-white rounded" [formGroup]="brandDetail" (ngSubmit)="updatebrand()" *ngIf="adminTest">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal text-primary"><strong>Modification de la marque</strong></h1>
+    </div>
+
+    <input  formControlName="id" [(ngModel)]="brand.id" type="hidden"  class="form-control " placeholder="id"  value="0"   >
+    <input formControlName="name" [(ngModel)]="brand.name" type="text"  class="form-control my-3 " placeholder="Marque"  autofocus=""  />
+
+    <button  class="btn btn-block btn-primary my-3">Enregistrer</button>
+    <div class="text-center pb-0">
+      <a routerLink="/admin" class=" mr-2 text-warning pb-0 " >Annuler</a>
+    </div>
+    <div class="text-center mt-2" *ngIf="msgErreur">
+      <p class="text-danger">{{msgErreur}}</p>
     </div>
   </form>

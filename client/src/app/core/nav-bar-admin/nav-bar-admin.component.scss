@@ -1,0 +1,27 @@
+nav{
+    a{
+        font-size: larger;
+        text-decoration: none;
+        color : #343a40;
+        &.active {
+            color : #C67F10;
+        }
+    }
+
+}
+.logo{
+    cursor: pointer;
+    max-height: 70px;
+
+    &:focus{
+        outline: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+
+    .logo{
+        cursor: pointer;
+        max-height: 35px;
+
+    }
+  }

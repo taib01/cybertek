@@ -1,32 +1,33 @@
-<p>order works!</p>
-<div class=" m-5" *ngIf="orders">
+
+<div class="taille-page m-5" *ngIf="adminTest">
+    <h1 class="text-center text-primary font-weight-bold my-2 py-3">Gestion des commandes </h1>
     <div class="table-responsive shadow">
         <table class="table table-striped ">
-            <thead>
+            <thead class="bg-primary text-uppercase text-left text-white">
                 <tr>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Id</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Id</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Nom de Client</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Nom de Client</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> N.Telephone</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> N.Telephone</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Date</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Date</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Adress</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Adresse</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Total</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Total</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> État</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> État</div>
                     </th>
-                    <th class="border-0 bg-light" scope="col">
-                        <div class="p-2 px-3 text-uppercase"> Action</div>
+                    <th class="border-0 " scope="col">
+                        <div class=" py-2 "> Action</div>
                     </th>
 
 
@@ -42,11 +43,11 @@
                     <td class="align-middle"> {{ item.adressClient }}</td>
                     <td class="align-middle">{{ item.total }} TND</td>
                     <td class="align-middle">{{ item.state }} </td>
-                    <td style="width: 150px;">
-                        <button  (click)="confirmorder(item.id)" class="btn btn-sm btn-success fa fa-check"></button>
-                        <button  (click)="waitingorder(item.id)" class="btn btn-sm btn-secondary ml-1 fa fa-refresh"></button>
-                        <button  (click)="cancelorder(item.id)" class="btn btn-sm btn-danger ml-1 fa fa-close"></button>
-                        <button  [routerLink]="['/order/details', { id: item.customerBasketId }]" class="btn btn-sm btn-secondary ml-1 fa fa-info"></button>
+                    <td style="width: 175px; p-0">
+                        <button  (click)="confirmorder(item.id)" class="btn btn-sm btn-primary fa fa-check btn-tb"></button>
+                        <button  (click)="waitingorder(item.id)" class="btn btn-sm btn-secondary ml-1 fa fa-refresh btn-tb"></button>
+                        <button  (click)="cancelorder(item.id)" class="btn btn-sm btn-danger ml-1 fa fa-close btn-tb"></button>
+                        <button  [routerLink]="['/order/details', { id: item.customerBasketId }]" class="btn btn-sm btn-secondary ml-1 fa fa-info btn-tb"></button>
                         
                     </td>
                 </tr>
@@ -54,6 +55,6 @@
         </table>
     </div>
 </div>
-<div class="container mt-5 text-center" *ngIf="orders.length===0">
-    <h1>Accessebal jus for users</h1>
+<div class="container mt-5 text-center" *ngIf="adminTest==null">
+    <h1 class="text-center text-warning font-weight-bold"><span style="font-size : 100px;">Oops</span><br>  Vous n'êtes pas autorisé  </h1>
 </div>

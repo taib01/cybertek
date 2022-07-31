@@ -1,18 +1,22 @@
 [
   {
     "Id": 1,
-    "Name": "Ordinateur Portable"
+    "Name": "PC portable"
   },
   {
     "Id": 2,
-    "Name": "Ordinateur Bureau"
+    "Name": "PC Gamer"
   },
   {
     "Id": 3,
-    "Name": "Smartphone"
+    "Name": "Ordinateur Bureau"
   },
   {
     "Id": 4,
-    "Name": "Tablette"
+    "Name": "Ordinateur Gamer"
+  },
+    {
+    "Id": 5,
+    "Name": "Smartphone"
   }
 ]

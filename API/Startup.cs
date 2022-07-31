@@ -8,15 +8,18 @@ using API.ExtentsionsStartup;
 using API.Helpers;
 using API.Middleware;
 using AutoMapper;
+using Core.Entities.Identity;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,26 +48,42 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            
+
             services.AddScoped<ITokenService , TokenService>()  ;    
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
-////// this swagger service pardefault ( mba3d ma3malna l exception mte3na rja3na zedneha mn jdid
-/////   mn lout 5ater tartib yefre9 )
+            ////// this swagger service pardefault ( mba3d ma3malna l exception mte3na rja3na zedneha mn jdid
+            /////   mn lout 5ater tartib yefre9 )
             /*services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });*/
+
+            // for role testin :
+
+
+
+            //services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            //services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+
+
             services.AddDbContext<StoreContext>(x =>
                         x.UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
             );
+
+            
             services.AddDbContext<AppIdentityDbContext>(x =>
             
                x.UseSqlite(_configuration.GetConnectionString("IdentityConnextion"))
+ 
             );
             
+
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configurationRedis = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configurationRedis);
@@ -91,6 +110,7 @@ namespace API
             );
 
             services.AddIdentityService(_configuration);
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -129,6 +149,8 @@ namespace API
                 o.MultipartBodyLengthLimit = int.MaxValue ; 
                 o.MemoryBufferThreshold= int.MaxValue;
             });
+
+            
         }
 
 

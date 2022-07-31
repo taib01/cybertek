@@ -89,6 +89,11 @@ namespace Infrastructure.Data
 
         public void putProduct(Product product){
             //var brand = _context.ProductBrands.Find(id);
+/*             if( product.PictureUrl ==null ){
+               product2 = _context.Products.Find(product.Id);
+                product.PictureUrl = product2.PictureUrl;
+            } */
+            product.PictureUrl= DateTime.Now.ToString("ddMMyyyy_HH_mm_ss") + "_" +product.PictureUrl ;
             _context.Products.Update(product);
             _context.SaveChanges();
         }

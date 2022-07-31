@@ -12,6 +12,8 @@ import { AdminService } from '../admin.service';
 export class UpdateBrandComponent implements OnInit {
 
   brandDetail : FormGroup ;
+  msgErreur :string; 
+  adminTest = localStorage.getItem("token-admin");
 
   private brand = {
       id: 0 ,
@@ -32,6 +34,12 @@ export class UpdateBrandComponent implements OnInit {
   }
   
   updatebrand(){
+    if(this.brand.name == "" )
+    {
+      this.msgErreur = "Inserer la catégorie"
+      setTimeout(()=>{ this.msgErreur  = '' ;}, 2500);
+      return;
+    }
     this.serv.updateBrand(this.brand);
   }
 }

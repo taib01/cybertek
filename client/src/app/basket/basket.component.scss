@@ -1,0 +1,13 @@
+@media only screen and (min-width: 769px) {
+    .Thidden {
+      height: 50vh !important;
+    }
+  }
+@media only screen and (max-width: 768px) {
+
+    .Thidden {
+      //visibility: hidden;
+      height: 40vh !important;
+      width: 90vw !important;
+    }
+  }

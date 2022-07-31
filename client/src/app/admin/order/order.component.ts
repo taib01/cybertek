@@ -11,6 +11,7 @@ import { OrderService } from './order.service';
 })
 export class OrderComponent implements OnInit {
   orders : IOrderDis[] = [] ;
+  adminTest = localStorage.getItem("token-admin");
 
 
   constructor( private orderService : OrderService , private route : Router) { }

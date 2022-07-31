@@ -1,0 +1,38 @@
+.home{
+    position: relative;
+    background-image: url('../../assets/images/bg-6.jpg');
+    background-size: 80vw 80vh;
+    width: 80vw;
+    height: 80vh;
+    margin-left: 10vw !important;
+    margin-right: 10vw !important;
+    //margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.fice{
+margin: auto !important;
+margin-top: 360px !important;
+
+}
+.icon-home{font-size: 30px !important;
+    margin: auto !important;
+    
+color: white;
+transform: rotateY(180deg);
+}
+.bg-icon-home{
+    width: 75px;
+    height: 75px;
+    background-color: #247D68;
+    margin: 0 auto 13px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}

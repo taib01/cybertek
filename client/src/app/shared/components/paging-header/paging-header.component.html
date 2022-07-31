@@ -1,6 +1,6 @@
-<header>
-    <h6 class="text-warning" *ngIf="totalCount && totalCount >0" >
-      Showing 
+<header class="">
+    <h6 class="text-primary" *ngIf="totalCount && totalCount >0" >
+      Affichage  
       <strong>
         {{(pageNumber -1) * pageSize+1}} - 
         {{ pageNumber * pageSize
@@ -9,9 +9,9 @@
           : pageNumber*pageSize
         }}
       </strong> 
-      of 
+      De 
       <strong> {{totalCount}} </strong> 
-      Products 
+      Articles
     </h6>
-    <h6 class="text-warning" *ngIf="totalCount===0"> There is <strong>0</strong> Result</h6>
+    <h6 class="text-primary" *ngIf="totalCount===0"> Il y a <strong>0</strong> Articles</h6>
   </header>

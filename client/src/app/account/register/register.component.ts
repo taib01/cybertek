@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         adressobject.zipcode= this.registerForm.value.zipcode ;
     
       var user = new User2() ;
-        user.email = this.registerForm.value.email;
+        user.email = this.registerForm.value.email.toLowerCase();
         user.displayName=this.registerForm.value.displayName;
         user.passowrd=this.registerForm.value.passowrd ;
         user.adress  = adressobject ;

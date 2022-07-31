@@ -1,4 +1,11 @@
-<app-nav-bar></app-nav-bar>
+<span *ngIf=" testAdmin ">
+  <app-nav-bar-admin></app-nav-bar-admin>
+</span>
+
+<span *ngIf="  testAdmin == null">
+  <app-nav-bar></app-nav-bar>
+</span>
+
 <div class=" container-principal" >
   <!--<h1>This home page</h1>
   <h2>Welcome to {{title}} ! </h2>-->
@@ -6,4 +13,13 @@
     <router-outlet></router-outlet>
 
 </div>
-<app-footer></app-footer>
+
+<span *ngIf=" testAdmin == null ">
+  <app-footer></app-footer>
+</span>
+<span *ngIf=" testAdmin" class=" mt-5 pt-5">
+  <div class="text-center bg-primary py-2 mt-5 ">
+    <span class="text-white font-weight-bold "> ©_TechnoTips || Développé par <a  class="text-white font-weight-bold " href="https://www.linkedin.com/in/taib-boudraa-11b712209/"> Taib Boudhraa</a></span>
+  </div>
+</span>
+

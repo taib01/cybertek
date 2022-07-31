@@ -1,6 +1,7 @@
 <!-- <h1>Basket</h1> -->
-<div *ngIf="(basket$ | async) === null" >
-    <p>There are no items in your basket</p>
+<div *ngIf="(basket$ | async) === null" class="text-center">
+    <h3 class="text-warning">Votre panier est  vide</h3>
+    <img src="../../assets/images/empty-basket.svg" class="Thidden"  alt="">
 </div>
 <div *ngIf="(basket$ | async) as basket" >
 
@@ -12,32 +13,32 @@
                         <thead class="bg-primary text-uppercase text-center text-white">
                             <tr>
                                 <th class="border-0 " scope="col">
-                                    <div class="py-2 px-0"> Products</div>
+                                    <div class="py-2 px-0"> Produits</div>
                                 </th>
                                 <th class="border-0 " scope="col">
-                                    <div class="py-2 px-0"> Price</div>
+                                    <div class="py-2 px-0"> Prix</div>
                                 </th>
                                 <th class="border-0 " scope="col">
-                                    <div class="py-2 px-0"> Quantity</div>
+                                    <div class="py-2 px-0"> Quantité</div>
                                 </th>
                                 <th class="border-0 " scope="col">
                                     <div class="py-2 px-0"> Total</div>
                                 </th>
                                 <th class="border-0 " scope="col">
-                                    <div class="py-2 px-0"> Remove</div>
+                                    <div class="py-2 px-0"> Retirer</div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="">
-                            <tr *ngFor="let item of basket.items">
-                                <th scope="row" class="row align-items-center">
+                            <tr *ngFor="let item of basket.items" >
+                                <th scope="row" class="row align-items-center" style="max-width:450px">
                                     <div class="p-2">
                                         <img src="{{item.pictureUrl}}" alt="{{item.productName}}"class="img-fluid" style="width:80px">
                                     </div>
                                     <div class="ml-3 d-inline-block align-middle">
-                                        <h5 class="mb-0">
-                                            <a routerLink="/shop/{{item.idProduct}}"class="text-dark">{{item.productName}}</a>
-                                        </h5>
+                                        <p class="mb-0 font-weight-bold">
+                                            <a routerLink="/shop/{{item.idProduct}}"class="text-dark"> {{item.productName.substring(0,18)+"..."}}</a>
+                                        </p>
                                         <span class="text-muted font-weight-normal font-italic d-bolck">
                                             type : {{item.type}}
                                         </span>
@@ -66,7 +67,7 @@
                     <app-order-totals></app-order-totals>
                     <a (click)="passeOrder()" class="btn btn-primary text-white py-2 btn-bock">
                         <!-- (click)="decrementItemQuatity(item)" routerLink="/checkout" -->
-                        Passe une commande
+                        Passer la commande
                     </a>
                 </div>
             </div>

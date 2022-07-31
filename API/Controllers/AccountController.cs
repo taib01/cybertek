@@ -140,8 +140,10 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             //var adress = _userManager.Users.FirstOrDefault(x=>x.email == loginDto.email).Include(x=>x.adress);
             if (user == null) return Unauthorized(new ApiResponse(401));
+            if (user.Role=="admin")return Unauthorized(new ApiResponse(401));
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Passowrd, false);
             if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
+            
             //var Tokendata = _tokenService.CreateToken(user);
             //var user2 = await _userManager.FindUserByClaimsPrincipalWithAdressAsync();
             return new UserDto2
@@ -154,6 +156,43 @@ namespace API.Controllers
                 phoneNumber=user.PhoneNumber
             };
         }
+
+
+        [HttpPost("loginadmin")]
+        public async Task<ActionResult<UserDto2>> LoginAdmin(LoginDto loginDto)
+        {
+            //UserManager<AppUser> input;
+
+            var user2 = _userManager.Users.Include(x => x.Adress).FirstOrDefault(a => a.Email == loginDto.Email);
+            //var user2 = await _userManager.Include(x=>x.Adress).FindByEmailAsync(loginDto.Email);
+
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            //var adress = _userManager.Users.FirstOrDefault(x=>x.email == loginDto.email).Include(x=>x.adress);
+            if (user == null) return Unauthorized(new ApiResponse(401));
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Passowrd, false);
+            if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
+            //var Tokendata = _tokenService.CreateToken(user);
+            //var user2 = await _userManager.FindUserByClaimsPrincipalWithAdressAsync();
+            
+            if (user.Role == "admin")
+            {
+                return new UserDto2
+                {
+                    Email = user.Email,
+                    Token = _tokenService.CreateToken(user),
+                    DisplayName = user.DisplayName,
+                    adress = _mapper.Map<Adress, AdressDto>(user2.Adress/*adress*/),
+
+                    phoneNumber = user.PhoneNumber
+                };
+            }
+
+            return Unauthorized(new ApiResponse(401));
+
+
+        }
+
+
 
 
         [HttpPost("register")]

@@ -10,11 +10,12 @@ import { ShopModule } from '../shop/shop.module';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
+import { NavBarAdminComponent } from './nav-bar-admin/nav-bar-admin.component';
 
 // BrowserAnimationsModule  zedtou wa9tely n7awel n5adem fel toastr
 
 @NgModule({
-  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, FooterComponent],
+  declarations: [NavBarComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, FooterComponent, NavBarAdminComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -25,6 +26,6 @@ import { FooterComponent } from './footer/footer.component';
       preventDuplicates:true
     })
   ],
-  exports :[NavBarComponent , FooterComponent]
+  exports :[NavBarComponent , FooterComponent,NavBarAdminComponent]
 })
 export class CoreModule {}
